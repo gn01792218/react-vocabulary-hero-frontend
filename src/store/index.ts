@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
-import signReducer from './signSlice'  //引入reducer
+import authReducer from './authSlice'  //引入reducer
+import userReducer from './userSlice'
 
 const store = configureStore({
   reducer: {
-    sign: signReducer,
+    auth: authReducer,
+    user: userReducer
   },
 })
 

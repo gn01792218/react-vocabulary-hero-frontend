@@ -1,7 +1,7 @@
 function About() {
     return (
-        <div className='text-white bg-black'>
-            這是About
+        <div className='text-white'>
+            這是Vocabulary-hero的前端頁面
         </div>
     )
 }

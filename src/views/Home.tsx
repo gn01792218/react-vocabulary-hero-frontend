@@ -1,19 +1,27 @@
-import logo from '@/assets/images/logo.svg'
+import useAuth from '../hooks/auth/useAuth'
+import useUser from '../hooks/user/useUser'
+import { useAppSelector } from '../store/hooks'
 function Home() {
-    const [count, setCount] = useState(0)
+    const { getAllUser } = useUser()
+    const { refreshAccessToken } = useAuth()
+    const users = useAppSelector((state)=>state.user.users)
+    
     return (
         <div className='text-white'>
+            <h1>歡迎來到單字救星</h1>
             <header className="text-white">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>Hello Vite + React!</p>
-                <p>
-                    <button type="button" onClick={() => setCount((count) => count + 1)}>
-                        count is: {count}
-                    </button>
-                </p>
-                <p>
-                </p>
+                <button onClick={getAllUser}>取得所有玩家列表</button>
+                <button onClick={refreshAccessToken}>取得新Token</button>
             </header>
+            {
+            users.map((user)=>{
+                return (
+                    <p>
+                        {user.name}
+                    </p>
+                )
+            })
+            }
         </div>
     )
 }
