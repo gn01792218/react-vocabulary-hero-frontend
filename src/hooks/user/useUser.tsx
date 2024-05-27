@@ -6,7 +6,6 @@ export default function useUser(){
     const dispatch = useDispatch()
     async function getAllUser(){
         const users = await getAllUserRequest()
-        if(!users) return alert('請求失敗')
         dispatch(setUsers(users))
     }
     return {

@@ -5,10 +5,12 @@ import { User } from '../types/auth'
 
 //1.定義state
 interface State { // 定義 a type for the slice state
-    users: User[]
+    users: User[],
+    user:User | null
   }
   const initialState: State = { // 定義 the initial state using that type
     users:[],
+    user:null
   }
 
   //2.撰寫reducer函式
@@ -17,6 +19,9 @@ export const userSlice = createSlice({
     // `createSlice` will infer the state type from the `initialState` argument
     initialState,
     reducers: {
+      setUser: (state, action: PayloadAction<User>) => {
+        state.user = action.payload
+      },
       setUsers: (state, action: PayloadAction<User[]>) => {
         state.users = action.payload
       },

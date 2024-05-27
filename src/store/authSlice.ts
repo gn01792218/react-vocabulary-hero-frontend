@@ -1,15 +1,16 @@
 //先引入相關依賴
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from './index'
+import { User } from '../types/auth'
 
 //1.定義state
 interface AuthState { // 定義 a type for the slice state
     accessToken: string
-    refreshToken: string
+    refreshToken: string,
   }
   const initialState: AuthState = { // 定義 the initial state using that type
     accessToken:'',
-    refreshToken:''
+    refreshToken:'',
   }
 
   //2.撰寫reducer函式

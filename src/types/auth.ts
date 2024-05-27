@@ -8,6 +8,12 @@ export interface LoginResponse{
     accessToken:string //要存進localStorage
     refreshToken:string //要存進localStorage
 }
+export interface LogOutRequest{
+    accessToken:string
+}
+export interface LogOutRespon{
+    message:string
+}
 export interface RefreshTokenRequest{
     refreshToken:string
 }
