@@ -12,7 +12,10 @@ export default function useVocabulary() {
         getAllVocabularyRequest, 
         createVocabularyRequest, 
         createExampleRequest, 
-        createSentenceRequest 
+        createSentenceRequest,
+        deleteVocabularyRequest,
+        deleteExampleRequest,
+        deleteSentenceRequest
     } = useVocabularyApi()
     const vocabularys = useAppSelector((state) => state.vocabulary.vocabularys)
     const currentVocabulary = useAppSelector((state) => state.vocabulary.currentVocabulary)
@@ -50,6 +53,19 @@ export default function useVocabulary() {
 
     async function getVocabularyIncludeExamplesAndStences(vocabularyId:number){
         return await getExampsAndStencesRequest({vocabularyId})
+    }
+    async function deleteVocabulary(vocabularyId:number){
+        const deleteObject = await deleteVocabularyRequest(vocabularyId)
+        const newVocabularyList = vocabularys.filter(v=>v.id !== deleteObject.id)
+        dispatch(setVocabularys([...newVocabularyList]))
+    }
+     async function deleteExample(exampleId:number){
+        await deleteExampleRequest(exampleId)
+        updateCurrentVocabulary()
+    }
+     async function deleteSentence(sentenceId:number){
+        await deleteSentenceRequest(sentenceId)
+        updateCurrentVocabulary()
     }
     async function updateCurrentVocabulary(){
         if(!currentVocabulary) return console.log('currentVocabulary丟失')
@@ -89,7 +105,10 @@ export default function useVocabulary() {
         createVocabularyExample,
         createExampleStence,
         getAllVocabulary,
-        getExamplesAndStences: getVocabularyIncludeExamplesAndStences,
+        getVocabularyIncludeExamplesAndStences,
+        deleteVocabulary,
+        deleteExample,
+        deleteSentence,
         onCreateVocabularyDataChange,
         onCreateExampleDataChange,
         onCreateSentenceDataChange,

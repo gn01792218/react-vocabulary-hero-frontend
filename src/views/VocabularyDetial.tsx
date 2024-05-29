@@ -9,7 +9,7 @@ function VocabularyDetail() {
     const dispatch = useAppDispatch()
     const { 
         currentVocabulary,
-        getExamplesAndStences
+        getVocabularyIncludeExamplesAndStences
     } = useVocabulary()
 
     useEffect(()=>{
@@ -17,7 +17,7 @@ function VocabularyDetail() {
     },[])
 
     async function init(){
-        const vocabulary = await getExamplesAndStences(Number(vocabularyId))
+        const vocabulary = await getVocabularyIncludeExamplesAndStences(Number(vocabularyId))
         dispatch(setCurrentVocabulary({...vocabulary}))
     }
     return (

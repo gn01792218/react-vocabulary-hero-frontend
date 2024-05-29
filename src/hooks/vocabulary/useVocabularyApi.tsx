@@ -19,12 +19,24 @@ export default function useVocabularyApi(){
     async function getExampsAndStencesRequest(payload:GetExamplesAndSentencesRequest){
         return await fetchData<Vocabulary>(`/vocabularys/${payload.vocabularyId}/examples/stences`,'GET')
     }
+    async function deleteVocabularyRequest(vocabularyId:number){
+        return await fetchData<Example>(`/vocabularys/${vocabularyId}`,'DELETE')
+    }  
+    async function deleteExampleRequest(exampleId:number){
+        return await fetchData<Example>(`/examples/${exampleId}`,'DELETE')
+    }  
+    async function deleteSentenceRequest(sentence:number){
+        return await fetchData<Example>(`/sentences/${sentence}`,'DELETE')
+    }  
     return {
         //methods
         getAllVocabularyRequest,
         createVocabularyRequest,
         createExampleRequest,
         createSentenceRequest,
-        getExampsAndStencesRequest
+        getExampsAndStencesRequest,
+        deleteVocabularyRequest,
+        deleteExampleRequest,
+        deleteSentenceRequest
     }
 }
