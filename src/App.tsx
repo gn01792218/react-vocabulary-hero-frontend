@@ -3,16 +3,28 @@ import TheHeader from './components/TheHeader'
 import { LocalStorageItem } from './types/localStorage'
 import { useAppDispatch } from './store/hooks'
 import { setAccessToken, setRefreshToken } from './store/authSlice'
+import useAuth from './hooks/auth/useAuth'
 function App() {
   const dispatch = useAppDispatch()
+
+  const { refreshToken, getUserInformation } = useAuth()
+  const navigate = useNavigate()
   
   useEffect(()=>{
-    loadUserToken()
+    initUser()
   },[])
 
-  function loadUserToken(){
-    dispatch(setAccessToken(localStorage.getItem(LocalStorageItem.ACCESSTOKEN) || ''))
-    dispatch(setRefreshToken(localStorage.getItem(LocalStorageItem.REFRESHTOKEN) || ''))
+  //computed
+  useMemo(()=>getUserInformation(),[refreshToken]) //取得refreshToken時候再要使用者的資料
+
+  function initUser(){
+    //先下載localStorage裡面的token
+    const refreshToken = localStorage.getItem(LocalStorageItem.ACCESSTOKEN)
+    const accessToken = localStorage.getItem(LocalStorageItem.REFRESHTOKEN)
+    if(!refreshToken) return navigate('/Login') //沒有refreshToken代表已經登出了
+
+    dispatch(setAccessToken(refreshToken))
+    if(accessToken) dispatch(setRefreshToken(accessToken))
   }
   
   return (

@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import authReducer from './authSlice'  //引入reducer
 import userReducer from './userSlice'
+import vocabulary from './vocabularySlice'
 
 const store = configureStore({
   reducer: {
     auth: authReducer,
-    user: userReducer
+    user: userReducer,
+    vocabulary:vocabulary
   },
 })
 
