@@ -1,6 +1,6 @@
 import useVocabulary from "../../hooks/vocabulary/useVocabulary"
 import { Example, Vocabulary } from "../../types/vocabulary"
-import ExampleCard from "./Example"
+import ExampleCard from "./ExampleCard"
 
 interface Props{
     vocabulary:Vocabulary
@@ -17,14 +17,16 @@ function VocabularyCard({vocabulary}:Props) {
         navigate(`/VocabularyDetial/${vocabulary.id}`)
     }
     return (
-        <div className='cursor-pointer border-red-200 border-2 p-5' onClick={goToVocabularyDetial}>
+        <div className='border-red-200 border-2 p-5'>
+            <div className="cursor-pointer" onClick={goToVocabularyDetial}>
             <p>{vocabulary.spelling} {vocabulary.pronunciation}</p>
+            </div>
             <button onClick={onGetExamplesAndStencesButtonClick} className="border-1 border-green-200">看解釋和例句</button>
             <ul>
                 {
                     examples.map((example)=>{
                         return (
-                            <ExampleCard example={example}/>
+                            <ExampleCard withCreateForm={false} vocabularyId={vocabulary.id} example={example}/>
                         )
                     })
                 }

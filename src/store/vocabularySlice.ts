@@ -6,9 +6,11 @@ import { Vocabulary } from '../types/vocabulary'
 //1.定義state
 interface State { // 定義 a type for the slice state
     vocabularys: Vocabulary[],
+    currentVocabulary:Vocabulary | null
   }
   const initialState: State = { // 定義 the initial state using that type
     vocabularys:[],
+    currentVocabulary:null
   }
 
   //2.撰寫reducer函式
@@ -20,11 +22,14 @@ export const slice = createSlice({
       setVocabularys: (state, action: PayloadAction<Vocabulary[]>) => {
         state.vocabularys = action.payload
       },
+      setCurrentVocabulary: (state, action: PayloadAction<Vocabulary>) => {
+        state.currentVocabulary = action.payload
+      },
     },
   })
 
   //3.導出reducer
-export const { setVocabularys } = slice.actions
+export const { setVocabularys, setCurrentVocabulary } = slice.actions
 
 //4.導出state
 //Other code such as selectors can use the imported `RootState` type

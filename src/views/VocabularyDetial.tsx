@@ -1,10 +1,14 @@
+import { current } from '@reduxjs/toolkit'
 import VocabularyDetailCard from '../components/vocabulary/VocabularyDetialCard'
 import useVocabulary from '../hooks/vocabulary/useVocabulary'
-import { Vocabulary } from '../types/vocabulary'
+import { useAppDispatch } from '../store/hooks'
+import { setCurrentVocabulary } from '../store/vocabularySlice'
+
 function VocabularyDetail() {
     const { vocabularyId } = useParams()
-    const [vocabulary, setVocabulary] = useState<Vocabulary>()
+    const dispatch = useAppDispatch()
     const { 
+        currentVocabulary,
         getExamplesAndStences
     } = useVocabulary()
 
@@ -14,13 +18,13 @@ function VocabularyDetail() {
 
     async function init(){
         const vocabulary = await getExamplesAndStences(Number(vocabularyId))
-        setVocabulary({...vocabulary})
+        dispatch(setCurrentVocabulary({...vocabulary}))
     }
     return (
         <section>
             {
-                vocabulary? 
-                <VocabularyDetailCard vocabulary={vocabulary}/> : 
+                currentVocabulary? 
+                <VocabularyDetailCard vocabulary={currentVocabulary}/> : 
                 <p>找不到該字卡</p>
             }
         </section>
