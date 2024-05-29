@@ -6,7 +6,13 @@ import { CreateExampleRequest, CreateSentenceRequest, CreateVocabularyRequest, V
 
 export default function useVocabulary() {
     const dispatch = useDispatch()
-    const { getAllVocabularyRequest, createVocabularyRequest, createExampleRequest, createSentenceRequest } = useVocabularyApi()
+    const { 
+        getExampsAndStencesRequest,
+        getAllVocabularyRequest, 
+        createVocabularyRequest, 
+        createExampleRequest, 
+        createSentenceRequest 
+    } = useVocabularyApi()
     const vocabularys = useAppSelector((state) => state.vocabulary.vocabularys)
     const [vocabularyFormData, setVocabularyFormData] = useState<CreateVocabularyRequest>({
         spelling: '',
@@ -33,6 +39,9 @@ export default function useVocabulary() {
     async function createVocabularyExampleAndSentence(vocabularyId: number){
         const example = await createExampleRequest(vocabularyId, exampleFormData)
         const sentence = await createSentenceRequest(example.id,vocabularyId, sentenceFormData)
+    }
+    async function getExamplesAndStences(vocabularyId:number){
+        return await getExampsAndStencesRequest({vocabularyId})
     }
     function onCreateVocabularyDataChange(e: React.ChangeEvent<HTMLInputElement>) {
         const { name, value } = e.target;
@@ -64,9 +73,10 @@ export default function useVocabulary() {
         //methods
         createVocabulary,
         getAllVocabulary,
+        getExamplesAndStences,
         onCreateVocabularyDataChange,
         onCreateExampleDataChange,
-        onCreateSentenceDataChange
+        onCreateSentenceDataChange,
     }
 }
 

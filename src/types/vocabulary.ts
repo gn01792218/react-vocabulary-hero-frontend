@@ -32,3 +32,6 @@ export interface CreateSentenceRequest {
   en:string
   zh:string
 }
+export interface GetExamplesAndSentencesRequest {
+  vocabularyId:number
+}

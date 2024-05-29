@@ -4,18 +4,25 @@ import { LocalStorageItem } from './types/localStorage'
 import { useAppDispatch } from './store/hooks'
 import { setAccessToken, setRefreshToken } from './store/authSlice'
 import useAuth from './hooks/auth/useAuth'
+import useVocabulary from './hooks/vocabulary/useVocabulary'
 function App() {
   const dispatch = useAppDispatch()
 
   const { refreshToken, getUserInformation } = useAuth()
+  const { getAllVocabulary } = useVocabulary()
   const navigate = useNavigate()
   
   useEffect(()=>{
     initUser()
+    initVocabulary()
   },[])
 
   //computed
   useMemo(()=>getUserInformation(),[refreshToken]) //取得refreshToken時候再要使用者的資料
+
+  function initVocabulary() {
+    getAllVocabulary()
+  }
 
   function initUser(){
     //先下載localStorage裡面的token
