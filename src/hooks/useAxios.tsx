@@ -1,5 +1,6 @@
 import axios, { AxiosError, AxiosResponse } from 'axios'
 import { LocalStorageItem } from '../types/localStorage'
+import { FetchOptions } from "../types/fetch"
 
 const axiosInstance = axios.create({
     baseURL: 'http://localhost:1222',

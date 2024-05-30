@@ -1,3 +1,3 @@
-interface FetchOptions{
+export interface FetchOptions{
     payload?:any,
 }
