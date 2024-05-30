@@ -59,7 +59,7 @@ export default function useAuth() {
             const user = await getUserRequest()
             dispatch(setUser(user))
         } catch (error) {
-            console.log(error)
+            refreshAccessToken()
         }
     }
     function verifyLogin(payload: LoginRequest) {

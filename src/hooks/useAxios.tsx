@@ -3,7 +3,7 @@ import { LocalStorageItem } from '../types/localStorage'
 import { FetchOptions } from "../types/fetch"
 
 const axiosInstance = axios.create({
-    baseURL: 'http://localhost:1222',
+    baseURL: 'http://localhost:1222/api',
 })
 // axiosInstance.interceptors.request.use((config) => {
 //     return config
@@ -14,8 +14,10 @@ axiosInstance.interceptors.response.use((respons) => {
     console.log(error.response?.data)
     let errMsg = ''
     switch(error.response?.status){
+        case 401:
+            errMsg =`accessToken過期。${error}`
+            break
         case 403:
-            
             errMsg = `身分驗證未通過。${error}`
             break
     }
