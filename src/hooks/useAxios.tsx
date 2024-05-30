@@ -3,7 +3,7 @@ import { LocalStorageItem } from '../types/localStorage'
 import { FetchOptions } from "../types/fetch"
 
 const axiosInstance = axios.create({
-    baseURL: 'http://localhost:1222/api',
+    baseURL: import.meta.env.VITE_API_BASE_URL,
 })
 // axiosInstance.interceptors.request.use((config) => {
 //     return config
