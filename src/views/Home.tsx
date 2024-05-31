@@ -9,12 +9,11 @@ function Home() {
     return (
         <div className=''>
             <h1>歡迎來到單字救星</h1>
-            <header className="">
-                <button onClick={getAllUser}>取得所有玩家列表</button>
-                <button onClick={refreshAccessToken}>取得新Token</button>
-            </header>
             <VocabularyCreateForm/>
-            <VocabularyList editable={false}/> 
+            <section>
+                我的單字
+                <VocabularyList/>  
+            </section>
         </div>
     )
 }

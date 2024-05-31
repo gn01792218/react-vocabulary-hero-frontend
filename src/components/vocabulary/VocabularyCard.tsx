@@ -11,7 +11,8 @@ function VocabularyCard({vocabulary}:Props) {
     const [examples, setExamples] = useState<Example[]>([])
     async function onGetExamplesAndStencesButtonClick(){
         const res = await getVocabularyIncludeExamplesAndStences(vocabulary.id)
-        setExamples([...res.examples])
+        if(!res) return 
+        setExamples([...res?.examples])
     }
     function goToVocabularyDetial(){
         navigate(`/VocabularyDetial/${vocabulary.id}`)
@@ -35,6 +36,7 @@ function VocabularyCard({vocabulary}:Props) {
                 </ul> : 
                 <p>尚無解釋</p>
             }
+            <button className="border-2 border-green-500" onClick={()=>navigate(`EditVocabulary/${vocabulary.id}`)}>編輯單字</button>
         </div>
     )
 }

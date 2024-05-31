@@ -8,8 +8,9 @@ export interface Vocabulary {
   definitionMissCount: number;
   spellMissCount: number;
   examples: Example[];
+  userId:number
   user: User;
-  noteGroup: NoteGroup;
+  noteGroup: NoteGroup[];
 }
 export interface Example {
   id: number;

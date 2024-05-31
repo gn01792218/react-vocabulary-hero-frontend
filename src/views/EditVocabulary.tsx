@@ -2,7 +2,7 @@ import VocabularyDetailCOntainer from "../components/vocabulary/VocabularyDetial
 
 function VocabularyDetail() {
     return (
-       <VocabularyDetailCOntainer editable={false}/> 
+       <VocabularyDetailCOntainer editable={true}/> 
     )
 }
 export default VocabularyDetail

@@ -7,6 +7,7 @@ function Routers() {
     const Login = lazy(()=>import('../views/Login'))
     const SignUp = lazy(()=>import('../views/SignUp'))
     const VocabularyDetial = lazy(()=>import('../views/VocabularyDetial'))
+    const EditVocabulary = lazy(()=>import('../views/EditVocabulary'))
     return (
       <div className="App">
         <Suspense fallback={<div>Loading</div>}>
@@ -16,6 +17,7 @@ function Routers() {
                 <Route path="/Login" element={<Login/>}/>
                 <Route path="/SignUp" element={<SignUp/>}/>
                 <Route path="/VocabularyDetial/:vocabularyId" element={<VocabularyDetial/>}/>
+                <Route path="/EditVocabulary/:vocabularyId" element={<EditVocabulary/>}/>
             </Routes>
         </Suspense>
       </div>
