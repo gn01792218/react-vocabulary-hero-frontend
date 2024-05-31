@@ -1,6 +1,9 @@
 import useVocabulary from '../../hooks/vocabulary/useVocabulary'
 import VocabularyCard from '../../components/vocabulary/VocabularyCard'
-function VocabularyList() {
+interface Props {
+    editable:boolean
+}
+function VocabularyList({editable}:Props){
     const {
         vocabularys
     } = useVocabulary()
@@ -10,7 +13,7 @@ function VocabularyList() {
                 vocabularys.map((v) => {
                     return (
                         <li>
-                            <VocabularyCard vocabulary={v} />
+                            <VocabularyCard editable={editable} vocabulary={v} />
                         </li>
                     )
                 }) :

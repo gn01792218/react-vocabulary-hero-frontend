@@ -21,7 +21,6 @@ function VocabularyCard({vocabulary}:Props) {
             <div className="cursor-pointer" onClick={goToVocabularyDetial}>
             <p>{vocabulary.spelling} {vocabulary.pronunciation}</p>
             </div>
-            <button className="block border-2 border-red-500" onClick={()=>deleteVocabulary(vocabulary.id)}>-刪除此單字</button>
             <button onClick={onGetExamplesAndStencesButtonClick} className="border-1 border-green-200">看解釋和例句</button>
             {
                 examples.length?
@@ -29,7 +28,7 @@ function VocabularyCard({vocabulary}:Props) {
                     {
                         examples.map((example)=>{
                             return (
-                                <ExampleCard withCreateForm={false} vocabularyId={vocabulary.id} example={example}/>
+                                <ExampleCard editable={false} vocabularyId={vocabulary.id} example={example}/>
                             )
                         })
                     }

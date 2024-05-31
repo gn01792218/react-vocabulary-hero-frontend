@@ -5,6 +5,7 @@ import { useAppDispatch } from './store/hooks'
 import { setAccessToken, setRefreshToken } from './store/authSlice'
 import useAuth from './hooks/auth/useAuth'
 import useVocabulary from './hooks/vocabulary/useVocabulary'
+import LoadingModal from './components/LoadingModal'
 function App() {
   const dispatch = useAppDispatch()
 
@@ -38,6 +39,7 @@ function App() {
     <div className="App bg-gray-500 min-h-screen">
       <TheHeader/>
       <Routers />
+      <LoadingModal/>
     </div>
   )
 }

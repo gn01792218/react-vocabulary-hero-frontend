@@ -1,17 +1,25 @@
 import { Vocabulary } from "../../types/vocabulary"
 import ExampleCard from "./ExampleCard"
 import ExampleCreateForm from "./ExampleCreateForm"
-
+import useVocabulary from "../../hooks/vocabulary/useVocabulary"
 interface Props {
+    editable:boolean
     vocabulary: Vocabulary | undefined
 }
-function VocabularyDetailCard({ vocabulary }: Props) {
+function VocabularyDetailCard({ editable, vocabulary }: Props) {
+    const { deleteVocabulary } = useVocabulary()
     const [openCreateExampleForm, setOpenCreateExampleForm] = useState(false)
     return (
         <div className='border-red-200 border-2 p-5'>
             <div>
                 <p>{vocabulary?.spelling} {vocabulary?.pronunciation}</p>
-                <button className="border-2 border-green-500" onClick={()=>setOpenCreateExampleForm(!openCreateExampleForm)}>+添加解釋</button>
+                {
+                    (editable && vocabulary) && 
+                    <section>
+                        <button className="block border-2 border-red-500" onClick={()=>deleteVocabulary(vocabulary?.id)}>-刪除此單字</button>
+                        <button className="border-2 border-green-500" onClick={()=>setOpenCreateExampleForm(!openCreateExampleForm)}>+添加解釋</button>
+                    </section>
+                }
                 {
                     (openCreateExampleForm && vocabulary?.id) && 
                     <ExampleCreateForm vocabularyId={vocabulary?.id} onSuccess={()=>setOpenCreateExampleForm(false)}/>
@@ -22,7 +30,7 @@ function VocabularyDetailCard({ vocabulary }: Props) {
                             return (
                                 <div key={example.id}>
                                     <span>{index+1}</span>
-                                    <ExampleCard withCreateForm={true} vocabularyId={vocabulary.id} example={example} />
+                                    <ExampleCard editable={editable} vocabularyId={vocabulary.id} example={example} />
                                 </div>
                             )
                         })

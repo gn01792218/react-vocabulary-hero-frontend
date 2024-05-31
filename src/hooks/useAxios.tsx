@@ -1,6 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from 'axios'
 import { LocalStorageItem } from '../types/localStorage'
 import { FetchOptions } from "../types/fetch"
+import { useLoading } from './useLoading'
 
 const axiosInstance = axios.create({
     baseURL: import.meta.env.VITE_API_BASE_URL,
@@ -25,15 +26,25 @@ axiosInstance.interceptors.response.use((respons) => {
 })
 
 export function useAxios() {
+    const { isLoading } = useLoading()
 
     async function fetchData<T>(url: string, method: string, options?: FetchOptions) {
-        const {data}: AxiosResponse<T> = await axiosInstance({
-            url,
-            method,
-            data: options?.payload,
-            headers: { Authorization: `Bearer ${localStorage.getItem(LocalStorageItem.ACCESSTOKEN)}` }
-        })
-        return data
+        isLoading(true)
+        try{
+            const {data}: AxiosResponse<T> = await axiosInstance({
+                url,
+                method,
+                data: options?.payload,
+                headers: { Authorization: `Bearer ${localStorage.getItem(LocalStorageItem.ACCESSTOKEN)}` }
+            })
+            return data
+        }catch(error){
+            console.log(error)
+        }finally{
+            setTimeout(()=>{
+                isLoading(false)
+            }, 500)
+        }
     }
 
     return {

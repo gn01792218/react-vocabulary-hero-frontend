@@ -14,7 +14,7 @@ function Home() {
                 <button onClick={refreshAccessToken}>取得新Token</button>
             </header>
             <VocabularyCreateForm/>
-            <VocabularyList/> 
+            <VocabularyList editable={false}/> 
         </div>
     )
 }

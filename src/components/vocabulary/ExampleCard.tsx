@@ -5,9 +5,9 @@ import SentenceCreateForm from "./StenceCreateForm"
 interface Props{
     vocabularyId:number
     example:Example
-    withCreateForm:boolean
+    editable:boolean
 }
-function ExampleCard({vocabularyId,example, withCreateForm}:Props) {
+function ExampleCard({vocabularyId,example, editable: withCreateForm}:Props) {
         const [openCreateStenceForm, setOpenCreateStenceForm] = useState(false)
         const { deleteExample, deleteSentence } = useVocabulary()
     return (
