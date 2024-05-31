@@ -18,7 +18,7 @@ function VocabularyDetailCOntainer({ editable }: Props) {
     },[])
     async function init(){
         const vocabulary = await getVocabularyIncludeExamplesAndStences(Number(vocabularyId))
-        dispatch(setCurrentVocabulary({...vocabulary}))
+        if(vocabulary) dispatch(setCurrentVocabulary({...vocabulary}))
     }
     return (
         <section>

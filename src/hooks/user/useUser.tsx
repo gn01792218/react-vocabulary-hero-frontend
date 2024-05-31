@@ -8,8 +8,7 @@ export default function useUser(){
     const user = useAppSelector(state=>state.user.user)
     async function getAllUser(){
         const users = await getAllUserRequest()
-        if(!users) return
-        dispatch(setUsers(users))
+        if(users) dispatch(setUsers(users))
     }
     return {
         //data

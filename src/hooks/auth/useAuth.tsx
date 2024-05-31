@@ -22,6 +22,7 @@ export default function useAuth() {
         if (!verifyLogin(payload)) return alert('請填寫正確的資料')
         try {
             const tokenObject = await loginRequest(payload)
+            if(!tokenObject) return
             setAuth(tokenObject)
             alert('登入成功!')
             navigate('/')
@@ -33,9 +34,10 @@ export default function useAuth() {
     async function logOut(payload: LogOutRequest) {
         if (!payload.accessToken) return alert('請帶入使用者id')
         try {
-            const { message } = await logOutRequest(payload)
+            const res = await logOutRequest(payload)
+            if(!res) return
             removeAuth()
-            alert(message)
+            alert(res.message)
             navigate('/')
         } catch (error) {
             alert('此使用者已被登出, 請重新登入')
@@ -47,7 +49,7 @@ export default function useAuth() {
         if (!refreshToken) return alert('需要refreshToken')
         try {
             const token = await refreshTokenRequest({ refreshToken })
-            setAuth(token)
+            if(token) setAuth(token)
         } catch (error) {
             console.log(error)
             navigate('/Login') //當refreshToken也過期時
@@ -57,7 +59,7 @@ export default function useAuth() {
         if (!refreshToken) return
         try {
             const user = await getUserRequest()
-            dispatch(setUser(user))
+            if(user) dispatch(setUser(user))
         } catch (error) {
             refreshAccessToken()
         }
