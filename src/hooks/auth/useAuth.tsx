@@ -96,6 +96,7 @@ export default function useAuth() {
         signUp,
         refreshAccessToken,
         logOut,
-        getUserInformation
+        getUserInformation,
+        setAuth
     }
 }

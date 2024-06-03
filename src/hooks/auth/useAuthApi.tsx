@@ -1,11 +1,13 @@
-import { LogOutRequest, LogOutRespon, LoginRequest, LoginResponse, RefreshTokenRequest, RefreshTokenRespon, SignUpRequest, User } from "../../types/auth"
+import { LogOutRequest, LogOutRespon, LoginRequest, LoginResponse, LoginWithGoogleByCredentialRequest, RefreshTokenRequest, RefreshTokenRespon, SignUpRequest, User } from "../../types/auth"
 import { useAxios } from "../useAxios"
-import { useAppSelector } from '../../store/hooks'
 
 export default function useAuthApi(){
     const { fetchData } = useAxios()
     async function loginRequest(payload:LoginRequest){
         return await fetchData<LoginResponse>('/users/login','POST',{payload})
+    }
+    async function loginWithGoogleByCredentialRequest(payload:LoginWithGoogleByCredentialRequest){
+        return await fetchData<LoginResponse>('/users/login/google/credential','POST',{payload})
     }
     async function signUpRequest(payload:SignUpRequest){
         return await fetchData<User>('/users/signUp','POST',{payload})
@@ -19,6 +21,7 @@ export default function useAuthApi(){
     return {
         //methods
         loginRequest,
+        loginWithGoogleByCredentialRequest,
         signUpRequest,
         refreshTokenRequest,
         logOutRequest

@@ -1,3 +1,4 @@
+import GoogleLoginButton from "../components/GoogleLoginButton"
 import useAuth from "../hooks/auth/useAuth"
 function Login() {
     const { login } = useAuth()
@@ -15,6 +16,7 @@ function Login() {
             login({ email, password })
         }
     }
+   
     return (
         <div className=''>
             <h1>使用者登入</h1>
@@ -23,6 +25,7 @@ function Login() {
                 <input type="text" value={password} onChange={onPasswordChange}  onKeyDown={onKeyDown} placeholder="請輸入password" />
                 <button onClick={() => login({ email, password })}>登入</button>
             </header>
+            <GoogleLoginButton/>
         </div>
     )
 }

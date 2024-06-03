@@ -4,6 +4,9 @@ export interface LoginRequest{
     email:string,
     password:string
 }
+export interface LoginWithGoogleByCredentialRequest{
+    credential:string
+}
 export interface LoginResponse{
     accessToken:string //要存進localStorage
     refreshToken:string //要存進localStorage

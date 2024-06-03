@@ -4,9 +4,13 @@ import useUser from '../../hooks/user/useUser'
 
 function VocabularyList(){
     const {
-        vocabularys
+        vocabularys,
+        getAllVocabulary
     } = useVocabulary()
     const { user } = useUser()
+    useMemo(()=>{
+        getAllVocabulary()
+    },[user])
     return (
         <ul >
             {   vocabularys.length?
