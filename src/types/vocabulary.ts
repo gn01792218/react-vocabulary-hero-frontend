@@ -1,5 +1,5 @@
 import { User } from "./auth";
-import { NoteGroup } from "./note";
+import { Note } from "./note";
 
 export interface Vocabulary {
   id: number;
@@ -9,8 +9,9 @@ export interface Vocabulary {
   spellMissCount: number;
   examples: Example[];
   userId:number
-  user: User;
-  noteGroup: NoteGroup[];
+  user?: User;
+  notesId:number[]
+  notes?: Note[];
 }
 export interface Example {
   id: number;

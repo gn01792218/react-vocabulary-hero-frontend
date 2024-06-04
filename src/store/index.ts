@@ -3,13 +3,15 @@ import authReducer from './authSlice'  //引入reducer
 import userReducer from './userSlice'
 import vocabulary from './vocabularySlice'
 import loadingSlice from './loadingSlice'
+import noteSlice from './noteSlice'
 
 const store = configureStore({
   reducer: {
     loading:loadingSlice,
     auth: authReducer,
     user: userReducer,
-    vocabulary:vocabulary
+    vocabulary:vocabulary,
+    note:noteSlice
   },
 })
 

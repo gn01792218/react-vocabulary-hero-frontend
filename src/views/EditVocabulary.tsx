@@ -1,8 +1,8 @@
-import VocabularyDetailCOntainer from "../components/vocabulary/VocabularyDetialContainer"
+import VocabularyDetailContainer from "../components/vocabulary/VocabularyDetialContainer"
 
-function VocabularyDetail() {
+function EditVocabulary() {
     return (
-       <VocabularyDetailCOntainer editable={true}/> 
+       <VocabularyDetailContainer editable={true}/> 
     )
 }
-export default VocabularyDetail
+export default EditVocabulary

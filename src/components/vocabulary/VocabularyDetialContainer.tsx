@@ -5,7 +5,7 @@ import { setCurrentVocabulary } from '../../store/vocabularySlice'
 interface Props {
     editable:boolean
 }
-function VocabularyDetailCOntainer({ editable }: Props) {
+function VocabularyDetailContainer({ editable }: Props) {
    const { vocabularyId } = useParams()
     const dispatch = useAppDispatch()
     const { 
@@ -30,4 +30,4 @@ function VocabularyDetailCOntainer({ editable }: Props) {
         </section>
     )
 }
-export default VocabularyDetailCOntainer
+export default VocabularyDetailContainer

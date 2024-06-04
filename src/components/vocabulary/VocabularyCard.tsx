@@ -7,7 +7,7 @@ interface Props{
 }
 function VocabularyCard({vocabulary}:Props) {
     const navigate = useNavigate()
-    const { getVocabularyIncludeExamplesAndStences, deleteVocabulary } = useVocabulary()
+    const { getVocabularyIncludeExamplesAndStences } = useVocabulary()
     const [examples, setExamples] = useState<Example[]>([])
     async function onGetExamplesAndStencesButtonClick(){
         const res = await getVocabularyIncludeExamplesAndStences(vocabulary.id)
