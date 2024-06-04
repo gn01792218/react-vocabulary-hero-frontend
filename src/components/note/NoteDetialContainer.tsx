@@ -1,4 +1,5 @@
 import useNote from '../../hooks/note/useNote'
+import useVocabulary from '../../hooks/vocabulary/useVocabulary'
 import NoteDetailCard from './NoteDetialCard'
 interface Props {
     editable:boolean
@@ -9,13 +10,14 @@ function NoteDetailContainer({ editable }: Props) {
         currentNote,
         getNote
     } = useNote()
+    const { getAllVocabularyIncludeExample } = useVocabulary()
 
     useEffect(()=>{
         init()
     },[])
     async function init(){
-        console.log('初始化此筆記')
         getNote(Number(noteId))
+        getAllVocabularyIncludeExample()
     }
     return (
         <section>

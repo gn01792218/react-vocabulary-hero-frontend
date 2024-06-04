@@ -10,6 +10,7 @@ function VocabularyDetailCard({ editable, vocabulary }: Props) {
     const navigate = useNavigate()
     const { deleteVocabulary } = useVocabulary()
     const [openCreateExampleForm, setOpenCreateExampleForm] = useState(false)
+  
     async function onVocabularyDeteled(){
         if(!vocabulary) return 
         await deleteVocabulary(vocabulary?.id)
@@ -32,6 +33,7 @@ function VocabularyDetailCard({ editable, vocabulary }: Props) {
                 }
                 <ul>
                     {
+                        vocabulary?.examples &&
                         vocabulary?.examples.map((example,index) => {
                             return (
                                 <div key={example.id}>

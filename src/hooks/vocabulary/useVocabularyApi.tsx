@@ -7,6 +7,9 @@ export default function useVocabularyApi(){
     async function getAllVocabularyRequest(){
         return await fetchData<Vocabulary[]>('/vocabularys','GET')
     }
+    async function getAllVocabularyIncludeExampleRequest(){
+        return await fetchData<Vocabulary[]>('/vocabularys/examples','GET')
+    }
     async function createVocabularyRequest(payload:CreateVocabularyRequest){
         return await fetchData<Vocabulary>(`/vocabularys/user/${user?.id}`,'POST',{payload})
     }
@@ -31,6 +34,7 @@ export default function useVocabularyApi(){
     return {
         //methods
         getAllVocabularyRequest,
+        getAllVocabularyIncludeExampleRequest,
         createVocabularyRequest,
         createExampleRequest,
         createSentenceRequest,

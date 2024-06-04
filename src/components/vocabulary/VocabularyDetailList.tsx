@@ -1,17 +1,17 @@
-import useVocabulary from '../../hooks/vocabulary/useVocabulary'
-import VocabularyCard from '../../components/vocabulary/VocabularyCard'
 import { Vocabulary } from '../../types/vocabulary'
+import VocabularyDetailCard from './VocabularyDetialCard'
 interface Props{
     vocabularys:Vocabulary[]
+    editable:boolean
 }
-function VocabularyList({vocabularys}:Props){
+function VocabularyDetailList({vocabularys, editable}:Props){
     return (
         <ul >
             {   vocabularys.length?
                 vocabularys.map((v) => {
                     return (
                         <li key={v.id}>
-                            <VocabularyCard  vocabulary={v} />
+                            <VocabularyDetailCard editable={editable} vocabulary={v}/>
                         </li>
                     )
                 }) :
@@ -20,4 +20,4 @@ function VocabularyList({vocabularys}:Props){
         </ul>
     )
 }
-export default VocabularyList
+export default VocabularyDetailList

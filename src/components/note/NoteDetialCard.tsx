@@ -1,7 +1,9 @@
 import { Note } from "../../types/note"
 import useNote from "../../hooks/note/useNote"
 import VocabularyCreateForm from "../vocabulary/VocabularyCreateForm"
-import VocabularyList from "../vocabulary/VocabularyList"
+import useVocabulary from "../../hooks/vocabulary/useVocabulary"
+import useUser from "../../hooks/user/useUser"
+import VocabularyDetailList from "../vocabulary/VocabularyDetailList"
 interface Props {
     editable:boolean
     note: Note | undefined
@@ -9,6 +11,8 @@ interface Props {
 function NoteDetailCard({ editable, note }: Props) {
     const navigate = useNavigate()
     const { deleteNote } = useNote()
+    const { user } = useUser()
+    const { vocabularys } = useVocabulary()
     const [openCreateVocabularyForm, setOpenCreateVocabularyForm] = useState(false)
     const [openExistVocabularyList, setOpenExistVocabularyList] = useState(false)
     async function onNoteDeteled(){
@@ -26,7 +30,7 @@ function NoteDetailCard({ editable, note }: Props) {
                     <section>
                         <button className="block border-2 border-red-500" onClick={onNoteDeteled}>-刪除此筆記</button>
                         <button className="border-2 border-green-500" onClick={()=>setOpenCreateVocabularyForm(!openCreateVocabularyForm)}>+添加單字</button>
-                        <button className="border-2 border-green-500" onClick={()=>setOpenExistVocabularyList(!openExistVocabularyList)}>+添加已有的單字</button>
+                        <button className="border-2 border-green-500" onClick={()=>setOpenExistVocabularyList(!openExistVocabularyList)}>+看看我自己的單字</button>
                     </section>
                 }
                 {
@@ -36,22 +40,15 @@ function NoteDetailCard({ editable, note }: Props) {
                 {
                     (openExistVocabularyList && note?.id) && 
                     <section>
-                        <VocabularyList/>
+                        <VocabularyDetailList editable={editable} vocabularys={vocabularys.filter(v=>v.userId === user?.id)}/>  
                     </section>
+                }         
+                ----------------------------------------------------------------------------------------
+                {
+                    note?.vocabularys &&
+                    <VocabularyDetailList editable={editable} vocabularys={note?.vocabularys}/>           
                 }
-                <ul>
-                    {
-                        note?.vocabularys.map((example,index) => {
-                            return (
-                                <div key={example.id}>
-                                    <span>{index+1}</span>
-                                    {/* <ExampleCard editable={editable} vocabularyId={note.id} example={example} /> */}
-                                </div>
-                            )
-                        })
-                    }
-                </ul>
-            </div> 
+                 </div> 
         </div>
     )
 }

@@ -3,7 +3,7 @@ import { Example, Vocabulary } from "../../types/vocabulary"
 import ExampleCard from "./ExampleCard"
 
 interface Props{
-    vocabulary:Vocabulary
+    vocabulary:Vocabulary,
 }
 function VocabularyCard({vocabulary}:Props) {
     const navigate = useNavigate()

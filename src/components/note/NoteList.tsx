@@ -1,17 +1,12 @@
-import VocabularyCard from '../vocabulary/VocabularyCard'
 import useUser from '../../hooks/user/useUser'
-import useNote from '../../hooks/note/useNote'
 import NoteCard from './NoteCard'
-
-function NoteList(){
-    const {
-        notes,
-        getAllNotes
-    } = useNote()
+import { Note } from '../../types/note'
+interface Props{
+    notes:Note[]
+}
+function NoteList({notes}:Props){
     const { user } = useUser()
-    useMemo(()=>{
-        getAllNotes()
-    },[user])
+    
     return (
         <ul >
             {   notes.length?
