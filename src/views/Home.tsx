@@ -9,7 +9,7 @@ function Home() {
     const { user } = useUser()
     const {
         vocabularys,
-        getAllVocabularyIncludeExample
+        getAllVocabularyIncludeExample,
     } = useVocabulary()
     const {
         notes,

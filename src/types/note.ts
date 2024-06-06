@@ -13,3 +13,10 @@ export interface NoteCreateRequest{
     title:string,
     description:string,
 }
+export interface NoteUpdateRequest{
+    title:string,
+    description:string,
+}
+export interface NoteVocabularysUpdateRequest{
+   vocabularys_id:number[] 
+}

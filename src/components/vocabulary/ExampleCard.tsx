@@ -30,8 +30,8 @@ function ExampleCard({vocabularyId,example, editable: withCreateForm}:Props) {
                 {
                     example.sentences.map((sentence)=>{
                         return (
-                            <div>
-                                <div className="py-1" key={sentence.id}>
+                            <div key={sentence.id}>
+                                <div className="py-1">
                                     <p>{sentence.en}</p>
                                     <p>{sentence.zh}</p>
                                 </div>

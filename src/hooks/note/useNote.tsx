@@ -1,7 +1,7 @@
 
 import { useDispatch } from "react-redux"
 import { useAppSelector } from '../../store/hooks'
-import { NoteCreateRequest } from '../../types/note'
+import { Note, NoteCreateRequest, NoteUpdateRequest, NoteVocabularysUpdateRequest } from '../../types/note'
 import useNoteApi from "./useNoteApi"
 import { setCurrentNote, setNotes } from "../../store/noteSlice"
 
@@ -11,7 +11,9 @@ export default function useNote() {
         createNoteRequest,
         getAllNotesRequest,
         getNoteIncludeVocabularyRequest,
-        deleteNoteRequest
+        deleteNoteRequest,
+        updateNote,
+        updateNoteVocabularys
     } = useNoteApi()
     const notes = useAppSelector((state) => state.note.notes)
     const currentNote = useAppSelector((state) => state.note.currentNote)
@@ -23,9 +25,9 @@ export default function useNote() {
         const notes = await getAllNotesRequest()
         if (notes) dispatch(setNotes([...notes]))
     }
-    async function getNote(noteId:number) {
+    async function getNote(noteId: number) {
         const note = await getNoteIncludeVocabularyRequest(noteId)
-        if(note) dispatch(setCurrentNote(note))
+        if (note) dispatch(setCurrentNote(note))
     }
     async function createNote() {
         if (!noteFormData.title) return alert('請給這個筆記一個名稱!!!')
@@ -44,6 +46,16 @@ export default function useNote() {
             [name]: value
         }));
     };
+    async function addVocabularyToNote(note: Note, payload: NoteVocabularysUpdateRequest) {
+        payload.vocabularys_id = pushNewIdListToOriginList(note, payload.vocabularys_id)
+        const updateNote = await updateNoteVocabularys(note.id, payload)
+        if (updateNote) dispatch(setCurrentNote(updateNote))
+    }
+    function pushNewIdListToOriginList(note: Note, payload: number[]) {
+        const originVocabularyIdList = note.vocabularys.map(v=>v.id)
+        originVocabularyIdList.push(...payload)
+        return originVocabularyIdList
+    }
     return {
         //data
         notes,
@@ -54,8 +66,10 @@ export default function useNote() {
         getAllNotes,
         getNote,
         deleteNote,
-        onCreateNoteDataChange
+        onCreateNoteDataChange,
+        addVocabularyToNote
     }
+
 }
 
 

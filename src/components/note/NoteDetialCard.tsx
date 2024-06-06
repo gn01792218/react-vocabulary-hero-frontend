@@ -4,6 +4,7 @@ import VocabularyCreateForm from "../vocabulary/VocabularyCreateForm"
 import useVocabulary from "../../hooks/vocabulary/useVocabulary"
 import useUser from "../../hooks/user/useUser"
 import VocabularyDetailList from "../vocabulary/VocabularyDetailList"
+import MyVocabularyAddToNoteCheckboxList from "../vocabulary/VocabularyCheckboxList"
 interface Props {
     editable:boolean
     note: Note | undefined
@@ -20,6 +21,7 @@ function NoteDetailCard({ editable, note }: Props) {
         await deleteNote(note?.id)
         navigate('/')
     }
+    
     return (
         <div className='border-red-200 border-2 p-5'>
             <div>
@@ -40,7 +42,7 @@ function NoteDetailCard({ editable, note }: Props) {
                 {
                     (openExistVocabularyList && note?.id) && 
                     <section>
-                        <VocabularyDetailList editable={editable} vocabularys={vocabularys.filter(v=>v.userId === user?.id)}/>  
+                        <MyVocabularyAddToNoteCheckboxList note={note} vocabularys={vocabularys.filter(v=>v.userId === user?.id)}/>
                     </section>
                 }         
                 ----------------------------------------------------------------------------------------

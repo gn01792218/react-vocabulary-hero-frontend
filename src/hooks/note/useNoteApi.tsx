@@ -1,5 +1,5 @@
 import { useAxios } from "../useAxios"
-import { Note, NoteCreateRequest } from "../../types/note"
+import { Note, NoteCreateRequest, NoteUpdateRequest, NoteVocabularysUpdateRequest } from "../../types/note"
 export default function useNoteApi(){
     const { fetchData } = useAxios()
     async function getAllNotesRequest(){
@@ -14,11 +14,19 @@ export default function useNoteApi(){
     async function getNoteIncludeVocabularyRequest(noteId:number){
         return await fetchData<Note>(`/notes/${noteId}`, "GET")
     }
+    async function updateNote(noteId:number, payload:NoteUpdateRequest){
+        return await fetchData<Note>(`/notes/${noteId}`,"PUT", {payload})
+    }
+    async function updateNoteVocabularys(noteId:number, payload:NoteVocabularysUpdateRequest){
+        return await fetchData<Note>(`/notes/${noteId}/vocabularys`,"PUT", {payload})
+    }
     return {
         //methods
         getAllNotesRequest,
         createNoteRequest,
         deleteNoteRequest,
-        getNoteIncludeVocabularyRequest
+        getNoteIncludeVocabularyRequest,
+        updateNote,
+        updateNoteVocabularys
     }
 }

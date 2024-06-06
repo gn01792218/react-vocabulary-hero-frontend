@@ -10,6 +10,7 @@ export default function useVocabulary() {
         getExampsAndStencesRequest,
         getAllVocabularyRequest,
         getAllVocabularyIncludeExampleRequest,
+        getAllVocabularyIncludeAllRelationshipRequest,
         createVocabularyRequest,
         createExampleRequest,
         createSentenceRequest,
@@ -37,6 +38,10 @@ export default function useVocabulary() {
     }
     async function getAllVocabularyIncludeExample() {
         const vocabularys = await getAllVocabularyIncludeExampleRequest()
+        if (vocabularys) dispatch(setVocabularys([...vocabularys]))
+    }
+    async function getAllVocabularyIncludeAllRelationship() {
+        const vocabularys = await getAllVocabularyIncludeAllRelationshipRequest()
         if (vocabularys) dispatch(setVocabularys([...vocabularys]))
     }
     async function createVocabulary() {
@@ -113,6 +118,7 @@ export default function useVocabulary() {
         createExampleStence,
         getAllVocabulary,
         getAllVocabularyIncludeExample,
+        getAllVocabularyIncludeAllRelationship,
         getVocabularyIncludeExamplesAndStences,
         deleteVocabulary,
         deleteExample,
