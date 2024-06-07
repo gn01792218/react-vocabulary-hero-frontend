@@ -51,8 +51,15 @@ export default function useNote() {
         const updateNote = await updateNoteVocabularys(note.id, payload)
         if (updateNote) dispatch(setCurrentNote(updateNote))
     }
+    async function removeVocabularyFromNote(noteId: number, vocabularyId:number) {
+        const note = await getNoteIncludeVocabularyRequest(noteId)
+        if(!note) return console.log('找不到該note')
+        const vocabularys_id = note.vocabularys.filter(v=>v.id !== vocabularyId).map(v=>v.id)
+        const updateNote = await updateNoteVocabularys(note.id, {vocabularys_id})
+        if (updateNote) dispatch(setCurrentNote(updateNote))
+    }
     function pushNewIdListToOriginList(note: Note, payload: number[]) {
-        const originVocabularyIdList = note.vocabularys.map(v=>v.id)
+        const originVocabularyIdList = note.vocabularys.map(v => v.id)
         originVocabularyIdList.push(...payload)
         return originVocabularyIdList
     }
@@ -67,6 +74,7 @@ export default function useNote() {
         getNote,
         deleteNote,
         onCreateNoteDataChange,
+        removeVocabularyFromNote,
         addVocabularyToNote
     }
 

@@ -1,6 +1,5 @@
 import { Note } from "../../types/note"
 import useNote from "../../hooks/note/useNote"
-import VocabularyCreateForm from "../vocabulary/VocabularyCreateForm"
 import useVocabulary from "../../hooks/vocabulary/useVocabulary"
 import useUser from "../../hooks/user/useUser"
 import VocabularyDetailList from "../vocabulary/VocabularyDetailList"
@@ -17,6 +16,7 @@ function NoteDetailCard({ editable, note }: Props) {
     const { vocabularys } = useVocabulary()
     const [openCreateVocabularyForm, setOpenCreateVocabularyForm] = useState(false)
     const [openExistVocabularyList, setOpenExistVocabularyList] = useState(false)
+
     async function onNoteDeteled(){
         if(!note) return 
         await deleteNote(note?.id)
@@ -49,7 +49,7 @@ function NoteDetailCard({ editable, note }: Props) {
                 ----------------------------------------------------------------------------------------
                 {
                     note?.vocabularys &&
-                    <VocabularyDetailList editable={editable} vocabularys={note?.vocabularys}/>           
+                    <VocabularyDetailList noteId={note.id} editable={editable} vocabularys={note?.vocabularys}/>           
                 }
                  </div> 
         </div>
