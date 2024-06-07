@@ -3,6 +3,9 @@ import { useDispatch } from "react-redux"
 import { setCurrentVocabulary, setVocabularys } from "../../store/vocabularySlice"
 import { useAppSelector } from '../../store/hooks'
 import { CreateExampleRequest, CreateSentenceRequest, CreateVocabularyRequest, Example, Vocabulary } from '../../types/vocabulary'
+import useNote from '../note/useNote'
+import { setCurrentNote } from '../../store/noteSlice'
+import { Note } from '../../types/note'
 
 export default function useVocabulary() {
     const dispatch = useDispatch()
@@ -12,12 +15,14 @@ export default function useVocabulary() {
         getAllVocabularyIncludeExampleRequest,
         getAllVocabularyIncludeAllRelationshipRequest,
         createVocabularyRequest,
+        createVocabularyFromNoteRequest,
         createExampleRequest,
         createSentenceRequest,
         deleteVocabularyRequest,
         deleteExampleRequest,
         deleteSentenceRequest
     } = useVocabularyApi()
+    const { currentNote } = useNote()
     const vocabularys = useAppSelector((state) => state.vocabulary.vocabularys)
     const currentVocabulary = useAppSelector((state) => state.vocabulary.currentVocabulary)
     const [vocabularyFormData, setVocabularyFormData] = useState<CreateVocabularyRequest>({
@@ -50,15 +55,33 @@ export default function useVocabulary() {
         const vocabulary = await createVocabularyRequest(vocabularyFormData)
         if (!vocabulary) return
         dispatch(setVocabularys([...vocabularys, vocabulary])) //推到共用的地方去 
-        const example = await createVocabularyExample(vocabulary.id)
+        const example = await createExample(vocabulary.id)
         if (!example) return console.log('example創建出了問題')
         if (!sentenceFormData.en) return console.log('沒有填寫句子，不建立句子')
-        createExampleStence(example.id, vocabulary.id)
+        createStence(example.id, vocabulary.id)
     }
-    async function createVocabularyExample(vocabularyId: number) {
+    async function createVocabularyFromNote(noteId: number) {
+        if (!vocabularyFormData.spelling) return alert('請填寫單字!!!')
+        if (!exampleFormData.definition) return alert('請填寫解釋!')
+        const vocabulary = await createVocabularyFromNoteRequest({ ...vocabularyFormData, noteId })
+        if (!vocabulary) return console.log('建立單字失敗!')
+        dispatch(setVocabularys([...vocabularys, vocabulary])) //推到共用的地方去 
+        const example = await createExample(vocabulary.id)
+        if (!example) return console.log('example創建出了問題')
+        if (!sentenceFormData.en) return console.log('沒有填寫句子，不建立句子')
+        const stence = await createStence(example.id, vocabulary.id)
+        if (!stence) return console.log('建立句子失敗')
+        //更新currentNote
+        if (!currentNote) return
+        dispatch(setCurrentNote({
+            ...currentNote,
+            vocabularys:[...currentNote.vocabularys, vocabulary]
+        }))
+    }
+    async function createExample(vocabularyId: number) {
         return await createExampleRequest(vocabularyId, exampleFormData)
     }
-    async function createExampleStence(exampleId: number, vocabularyId: number) {
+    async function createStence(exampleId: number, vocabularyId: number) {
         return await createSentenceRequest(exampleId, vocabularyId, sentenceFormData)
     }
 
@@ -114,8 +137,9 @@ export default function useVocabulary() {
         sentenceFormData,
         //methods
         createVocabulary,
-        createVocabularyExample,
-        createExampleStence,
+        createVocabularyFromNote,
+        createExample,
+        createStence,
         getAllVocabulary,
         getAllVocabularyIncludeExample,
         getAllVocabularyIncludeAllRelationship,

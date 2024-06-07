@@ -1,6 +1,6 @@
 import { useAxios } from "../useAxios"
 import { useAppSelector } from '../../store/hooks'
-import { CreateExampleRequest, CreateSentenceRequest, CreateVocabularyRequest, Example, GetExamplesAndSentencesRequest, Vocabulary } from "../../types/vocabulary"
+import { CreateExampleRequest, CreateSentenceRequest, CreateVocabularyFromNoteRequest, CreateVocabularyRequest, Example, GetExamplesAndSentencesRequest, Vocabulary } from "../../types/vocabulary"
 export default function useVocabularyApi(){
     const { fetchData } = useAxios()
     const user = useAppSelector((state)=>state.user.user)
@@ -14,7 +14,10 @@ export default function useVocabularyApi(){
         return await fetchData<Vocabulary[]>('/vocabularys/all','GET')
     }
     async function createVocabularyRequest(payload:CreateVocabularyRequest){
-        return await fetchData<Vocabulary>(`/vocabularys/user/${user?.id}`,'POST',{payload})
+        return await fetchData<Vocabulary>('/vocabularys/user','POST',{payload})
+    }
+    async function createVocabularyFromNoteRequest(payload:CreateVocabularyFromNoteRequest){
+        return await fetchData<Vocabulary>('/vocabularys/note','POST',{payload})
     }
     async function createExampleRequest(vocabularyId:number,payload:CreateExampleRequest){
         return await fetchData<Example>(`/examples/vocabulary/${vocabularyId}`,'POST',{payload})
@@ -40,6 +43,7 @@ export default function useVocabularyApi(){
         getAllVocabularyIncludeExampleRequest,
         getAllVocabularyIncludeAllRelationshipRequest,
         createVocabularyRequest,
+        createVocabularyFromNoteRequest,
         createExampleRequest,
         createSentenceRequest,
         getExampsAndStencesRequest,

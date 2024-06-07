@@ -5,6 +5,7 @@ import useVocabulary from "../../hooks/vocabulary/useVocabulary"
 import useUser from "../../hooks/user/useUser"
 import VocabularyDetailList from "../vocabulary/VocabularyDetailList"
 import MyVocabularyAddToNoteCheckboxList from "../vocabulary/VocabularyCheckboxList"
+import VocabularyCreateFormFromNote from "../vocabulary/VocabularyCreateFormFromNote"
 interface Props {
     editable:boolean
     note: Note | undefined
@@ -37,7 +38,7 @@ function NoteDetailCard({ editable, note }: Props) {
                 }
                 {
                     (openCreateVocabularyForm && note?.id) && 
-                    <VocabularyCreateForm />
+                    <VocabularyCreateFormFromNote noteId={note.id}/>
                 }
                 {
                     (openExistVocabularyList && note?.id) && 

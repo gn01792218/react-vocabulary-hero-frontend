@@ -27,6 +27,11 @@ export interface CreateVocabularyRequest {
   spelling: string;
   pronunciation: string;
 }
+export interface CreateVocabularyFromNoteRequest {
+  spelling: string;
+  pronunciation: string;
+  noteId:number
+}
 export interface CreateExampleRequest {
   definition: string;
 }
