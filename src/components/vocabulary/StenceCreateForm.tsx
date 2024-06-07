@@ -8,11 +8,11 @@ function SentenceCreateForm({vocabularyId, exampleId, onSuccess}:Props) {
     const {
         sentenceFormData,
         onCreateSentenceDataChange,
-        createExampleStence,
+        createStence,
         updateCurrentVocabulary
     } = useVocabulary()
     async function onClick(){
-        await createExampleStence(exampleId,vocabularyId)
+        await createStence(exampleId,vocabularyId)
         await updateCurrentVocabulary()
         onSuccess()
     }

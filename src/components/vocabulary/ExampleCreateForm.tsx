@@ -7,12 +7,12 @@ function ExampleCreateForm({vocabularyId, onSuccess}:Props) {
     const {
         exampleFormData,
         onCreateExampleDataChange,
-        createVocabularyExample,
+        createExample,
         updateCurrentVocabulary
     } = useVocabulary()
 
     async function onClick(){
-       await createVocabularyExample(vocabularyId)
+       await createExample(vocabularyId)
        await updateCurrentVocabulary()
        onSuccess()
     }

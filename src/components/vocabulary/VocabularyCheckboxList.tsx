@@ -12,8 +12,7 @@ function MyVocabularyAddToNoteCheckboxList({ note, vocabularys }: Props) {
     const { getAllVocabularyIncludeAllRelationship } = useVocabulary()
     const [ checkedList, setCheckedList ] = useState<number[]>([])
     function onVocabularyChecked(id: number) {
-        const newArray = Array.from(new Set<number>().add(id))
-        setCheckedList([...newArray])
+        setCheckedList([...Array.from(new Set<number>(checkedList).add(id))])
     }
     function onVocabularyDisChecked(id: number) {
         const newArray = checkedList.filter(checkedId => checkedId !== id)
