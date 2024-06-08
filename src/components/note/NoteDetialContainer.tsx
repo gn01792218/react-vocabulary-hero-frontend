@@ -8,7 +8,7 @@ function NoteDetailContainer({ editable }: Props) {
    const { noteId } = useParams()
     const { 
         currentNote,
-        getNote
+        updateStoreCurrentNote,
     } = useNote()
     const { getAllVocabularyIncludeExample } = useVocabulary()
 
@@ -16,7 +16,7 @@ function NoteDetailContainer({ editable }: Props) {
         init()
     },[])
     async function init(){
-        getNote(Number(noteId))
+        updateStoreCurrentNote(Number(noteId))
         getAllVocabularyIncludeExample()
     }
     return (

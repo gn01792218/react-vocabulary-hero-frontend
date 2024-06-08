@@ -6,8 +6,6 @@ interface Props{
 }
 function NoteCard({note}:Props) {
     const navigate = useNavigate()
-    const {  } = useNote()
-
     function goToNoteDetial(){
         navigate(`/NoteDetial/${note.id}`)
     }

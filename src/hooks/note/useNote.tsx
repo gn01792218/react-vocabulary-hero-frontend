@@ -26,8 +26,7 @@ export default function useNote() {
         if (notes) dispatch(setNotes([...notes]))
     }
     async function getNote(noteId: number) {
-        const note = await getNoteIncludeVocabularyRequest(noteId)
-        if (note) dispatch(setCurrentNote(note))
+        return await getNoteIncludeVocabularyRequest(noteId)
     }
     async function createNote() {
         if (!noteFormData.title) return alert('請給這個筆記一個名稱!!!')
@@ -56,8 +55,13 @@ export default function useNote() {
         if(!note) return console.log('找不到該note')
         const vocabularys_id = note.vocabularys.filter(v=>v.id !== vocabularyId).map(v=>v.id)
         const updateNote = await updateNoteVocabularys(note.id, {vocabularys_id})
-        if (updateNote) dispatch(setCurrentNote(updateNote))
+        if(updateNote) dispatch(setCurrentNote(updateNote))
     }
+    async function updateStoreCurrentNote(noteId:number) {
+        const note = await getNote(noteId)
+        if(note) dispatch(setCurrentNote({...note}))
+    }
+
     function pushNewIdListToOriginList(note: Note, payload: number[]) {
         const originVocabularyIdList = note.vocabularys.map(v => v.id)
         originVocabularyIdList.push(...payload)
@@ -73,6 +77,7 @@ export default function useNote() {
         getAllNotes,
         getNote,
         deleteNote,
+        updateStoreCurrentNote,
         onCreateNoteDataChange,
         removeVocabularyFromNote,
         addVocabularyToNote

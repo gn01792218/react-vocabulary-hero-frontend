@@ -1,6 +1,6 @@
 import { useAxios } from "../useAxios"
 import { useAppSelector } from '../../store/hooks'
-import { CreateExampleRequest, CreateSentenceRequest, CreateVocabularyFromNoteRequest, CreateVocabularyRequest, Example, GetExamplesAndSentencesRequest, Vocabulary } from "../../types/vocabulary"
+import { CreateExampleRequest, CreateSentenceRequest, CreateVocabularyFromNoteRequest, CreateVocabularyRequest, Example, GetExamplesAndSentencesRequest, Sentence, Vocabulary } from "../../types/vocabulary"
 export default function useVocabularyApi(){
     const { fetchData } = useAxios()
     const user = useAppSelector((state)=>state.user.user)
@@ -29,13 +29,13 @@ export default function useVocabularyApi(){
         return await fetchData<Vocabulary>(`/vocabularys/${payload.vocabularyId}/examples/stences`,'GET')
     }
     async function deleteVocabularyRequest(vocabularyId:number){
-        return await fetchData<Example>(`/vocabularys/${vocabularyId}`,'DELETE')
+        return await fetchData<Vocabulary>(`/vocabularys/${vocabularyId}`,'DELETE')
     }  
     async function deleteExampleRequest(exampleId:number){
         return await fetchData<Example>(`/examples/${exampleId}`,'DELETE')
     }  
     async function deleteSentenceRequest(sentence:number){
-        return await fetchData<Example>(`/sentences/${sentence}`,'DELETE')
+        return await fetchData<Sentence>(`/sentences/${sentence}`,'DELETE')
     }  
     return {
         //methods

@@ -1,21 +1,19 @@
 import useVocabulary from '../../hooks/vocabulary/useVocabulary'
 interface Props{
-    vocabularyId:number
-    onSuccess:Function
+    vocabularyId:number,
+    onCreateSuccess:Function
 }
-function ExampleCreateForm({vocabularyId, onSuccess}:Props) {
+function ExampleCreateForm({vocabularyId, onCreateSuccess}:Props) {
     const {
         exampleFormData,
         onCreateExampleDataChange,
-        createExample,
-        updateCurrentVocabulary
+        createExample
     } = useVocabulary()
-
-    async function onClick(){
-       await createExample(vocabularyId)
-       await updateCurrentVocabulary()
-       onSuccess()
+    async function handleClick(){
+        await createExample(vocabularyId)
+        onCreateSuccess()
     }
+
     return (
         <div>
             <input 
@@ -26,7 +24,7 @@ function ExampleCreateForm({vocabularyId, onSuccess}:Props) {
             onChange={onCreateExampleDataChange} 
             placeholder='請輸入單字解釋' 
             />
-            <button className='border-2 border-green-900' onClick={onClick}>確認</button>
+            <button className='border-2 border-green-900' onClick={handleClick}>確認</button>
         </div>
     )
 }

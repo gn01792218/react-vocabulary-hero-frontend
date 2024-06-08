@@ -2,25 +2,26 @@ import { Vocabulary } from "../../types/vocabulary"
 import ExampleCard from "./ExampleCard"
 import ExampleCreateForm from "./ExampleCreateForm"
 import useVocabulary from "../../hooks/vocabulary/useVocabulary"
+import useNote from "../../hooks/note/useNote"
 interface Props {
     editable:boolean
     vocabulary: Vocabulary | undefined
 }
-function VocabularyDetailCard({ editable, vocabulary }: Props) {
+function VocabularyDetailCardForNote({ editable, vocabulary }: Props) {
     const navigate = useNavigate()
-    const { deleteVocabulary, updateStoreVocabularys, updateCurrentVocabulary } = useVocabulary()
+    const { deleteVocabulary } = useVocabulary()
+    const { currentNote, updateStoreCurrentNote } = useNote()
     const [openCreateExampleForm, setOpenCreateExampleForm] = useState(false)
-  
-    async function onVocabularyDeteled(){
-        if(!vocabulary) return 
-        const deleteObj = await deleteVocabulary(vocabulary?.id)
-        if(deleteObj)await updateStoreVocabularys(deleteObj)
-        navigate('/')
-    }
     async function onExampleCreateSuccess(){
         if(!vocabulary) return 
-        await updateCurrentVocabulary()
+        if(!currentNote?.id) return console.log('current Note 遺失 id')
+        updateStoreCurrentNote(currentNote.id) 
         setOpenCreateExampleForm(false)
+    }
+    async function onVocabularyDeteled(){
+        if(!vocabulary || !currentNote?.id) return 
+        await deleteVocabulary(vocabulary?.id)
+        await updateStoreCurrentNote(currentNote.id)  
     }
     return (
         <div className='border-red-200 border-2 p-5'>
@@ -35,7 +36,7 @@ function VocabularyDetailCard({ editable, vocabulary }: Props) {
                 }
                 {
                     (openCreateExampleForm && vocabulary?.id) && 
-                    <ExampleCreateForm vocabularyId={vocabulary?.id} onCreateSuccess={onExampleCreateSuccess}/>
+                    <ExampleCreateForm vocabularyId={vocabulary.id} onCreateSuccess={onExampleCreateSuccess}/>
                 }
                 <ul>
                     {
@@ -44,7 +45,7 @@ function VocabularyDetailCard({ editable, vocabulary }: Props) {
                             return (
                                 <div key={example.id}>
                                     <span>{index+1}</span>
-                                    <ExampleCard editable={editable} vocabularyId={vocabulary.id} example={example} />
+                                    <ExampleCard noteId={currentNote?.id} editable={editable} vocabularyId={vocabulary.id} example={example} />
                                 </div>
                             )
                         })
@@ -54,4 +55,4 @@ function VocabularyDetailCard({ editable, vocabulary }: Props) {
         </div>
     )
 }
-export default VocabularyDetailCard
+export default VocabularyDetailCardForNote

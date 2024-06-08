@@ -5,7 +5,6 @@ import { useAppSelector } from '../../store/hooks'
 import { CreateExampleRequest, CreateSentenceRequest, CreateVocabularyRequest, Example, Vocabulary } from '../../types/vocabulary'
 import useNote from '../note/useNote'
 import { setCurrentNote } from '../../store/noteSlice'
-import { Note } from '../../types/note'
 
 export default function useVocabulary() {
     const dispatch = useDispatch()
@@ -90,13 +89,15 @@ export default function useVocabulary() {
     }
     async function deleteVocabulary(vocabularyId: number) {
         const deleteObject = await deleteVocabularyRequest(vocabularyId)
-        if (!deleteObject) return
+        if (!deleteObject) return null
+        return deleteObject
+    }
+    function updateStoreVocabularys(deleteObject: Vocabulary) {
         const newVocabularyList = vocabularys.filter(v => v.id !== deleteObject.id)
         dispatch(setVocabularys([...newVocabularyList]))
     }
     async function deleteExample(exampleId: number) {
         await deleteExampleRequest(exampleId)
-        updateCurrentVocabulary()
     }
     async function deleteSentence(sentenceId: number) {
         await deleteSentenceRequest(sentenceId)
@@ -150,7 +151,8 @@ export default function useVocabulary() {
         onCreateVocabularyDataChange,
         onCreateExampleDataChange,
         onCreateSentenceDataChange,
-        updateCurrentVocabulary
+        updateCurrentVocabulary,
+        updateStoreVocabularys
     }
 }
 
