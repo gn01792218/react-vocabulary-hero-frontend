@@ -1,3 +1,4 @@
+# vocabulary-hero
 # react+ts+tailwindCss 樣板
 ## 讓專案擁有自動import 功能
 ```javascript
@@ -17,3 +18,6 @@ export default defineConfig({
   ],
 })
 ```
+## 圖片辨識文字功能 - tesseract
+使用套件 
+https://tesseract.projectnaptha.com/

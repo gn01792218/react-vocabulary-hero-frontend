@@ -1,3 +1,4 @@
+import ImageToTextConvertor from '../components/ImageToTextConvertor'
 import NoteCreateForm from '../components/note/NoteCreatForm'
 import NoteList from '../components/note/NoteList'
 import VocabularyCreateForm from '../components/vocabulary/VocabularyCreateForm'
@@ -25,6 +26,7 @@ function Home() {
             <section className='w-[200px] flex justify-around'>
                 <NoteCreateForm />
                 <VocabularyCreateForm />
+                <ImageToTextConvertor/>
             </section>
             <section>
                 我的筆記
