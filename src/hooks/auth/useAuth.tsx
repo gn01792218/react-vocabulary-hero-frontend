@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux"
 import { useAppSelector } from "../../store/hooks"
-import { LogOutRequest, LoginRequest, LoginResponse, RefreshTokenRespon, SignUpRequest } from "../../types/auth"
+import { LogOutRequest, LoginRequest, LoginResponse, RefreshTokenRespon, SignUpRequest, User } from "../../types/auth"
 import { LocalStorageItem } from "../../types/localStorage"
 import useAuthApi from "./useAuthApi"
 import { setAccessToken, setRefreshToken } from "../../store/authSlice"
@@ -57,11 +57,13 @@ export default function useAuth() {
     }
     async function getUserInformation() { //專門給app初始化撈取使用者資料使用
         if (!refreshToken) return
+        let user:User | undefined
         try {
-            const user = await getUserRequest()
+            user = await getUserRequest()
             if(user) dispatch(setUser(user))
-        } catch (error) {
-            refreshAccessToken()
+        }
+        finally{
+            if(!user) refreshAccessToken()
         }
     }
     function verifyLogin(payload: LoginRequest) {
