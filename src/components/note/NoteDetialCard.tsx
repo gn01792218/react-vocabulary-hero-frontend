@@ -2,8 +2,7 @@ import { Note } from "../../types/note"
 import useNote from "../../hooks/note/useNote"
 import useVocabulary from "../../hooks/vocabulary/useVocabulary"
 import useUser from "../../hooks/user/useUser"
-import VocabularyDetailList from "../vocabulary/VocabularyDetailList"
-import MyVocabularyAddToNoteCheckboxList from "../vocabulary/VocabularyCheckboxList"
+import MyVocabularyAddToNoteCheckboxList from "../vocabulary/MyVocabularyCheckboxList"
 import VocabularyCreateFormFromNote from "../vocabulary/VocabularyCreateFormFromNote"
 import VocabularyDetailListForNote from "../vocabulary/VocabularyDetailListForNote"
 interface Props {
@@ -15,8 +14,6 @@ function NoteDetailCard({ editable, note }: Props) {
     const { deleteNote } = useNote()
     const { user } = useUser()
     const { vocabularys } = useVocabulary()
-    const [openCreateVocabularyForm, setOpenCreateVocabularyForm] = useState(false)
-    const [openExistVocabularyList, setOpenExistVocabularyList] = useState(false)
 
     async function onNoteDeteled(){
         if(!note) return 
@@ -33,20 +30,15 @@ function NoteDetailCard({ editable, note }: Props) {
                     (editable && note) && 
                     <section>
                         <button className="block border-2 border-red-500" onClick={onNoteDeteled}>-刪除此筆記</button>
-                        <button className="border-2 border-green-500" onClick={()=>setOpenCreateVocabularyForm(!openCreateVocabularyForm)}>+添加單字</button>
-                        <button className="border-2 border-green-500" onClick={()=>setOpenExistVocabularyList(!openExistVocabularyList)}>+看看我自己的單字</button>
                     </section>
                 }
                 {
-                    (openCreateVocabularyForm && note?.id) && 
-                    <VocabularyCreateFormFromNote noteId={note.id}/>
-                }
-                {
-                    (openExistVocabularyList && note?.id) && 
+                    note?.id && 
                     <section>
+                        <VocabularyCreateFormFromNote noteId={note.id}/>
                         <MyVocabularyAddToNoteCheckboxList note={note} vocabularys={vocabularys.filter(v=>v.userId === user?.id)}/>
                     </section>
-                }         
+                }     
                 ----------------------------------------------------------------------------------------
                 {
                     note?.vocabularys &&

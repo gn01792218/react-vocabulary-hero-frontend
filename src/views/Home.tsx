@@ -15,22 +15,24 @@ function Home() {
         notes,
         getAllNotes
     } = useNote()
-    useMemo(()=>{
+    useMemo(() => {
         getAllNotes()
         getAllVocabularyIncludeExample()
-    },[user])
+    }, [user])
     return (
         <div className=''>
             <h1>歡迎來到單字救星</h1>
-            <NoteCreateForm/>
-            <VocabularyCreateForm/>
+            <section className='w-[200px] flex justify-around'>
+                <NoteCreateForm />
+                <VocabularyCreateForm />
+            </section>
             <section>
                 我的筆記
-                <NoteList notes={notes}/>  
+                <NoteList notes={notes} />
             </section>
             <section>
                 我的單字
-                <VocabularyList vocabularys={vocabularys.filter(v=>v.userId === user?.id)}/>  
+                <VocabularyList vocabularys={vocabularys.filter(v => v.userId === user?.id)} />
             </section>
         </div>
     )
