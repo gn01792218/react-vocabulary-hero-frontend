@@ -14,12 +14,15 @@ function VocabularyCreateFormFromNote({ noteId }: Props) {
         onCreateVocabularyDataChange,
         onCreateExampleDataChange,
         onCreateSentenceDataChange,
+        getAllVocabularyIncludeAllRelationship
     } = useVocabulary()
     const { updateStoreCurrentNote } = useNote()
     const [open, setOpen] = useState(false)
     async function onSubmit() {
-        await createVocabularyFromNote(noteId)
+        const vocabulary =  await createVocabularyFromNote(noteId)
+        if(!vocabulary) return 
         await updateStoreCurrentNote(noteId)
+        getAllVocabularyIncludeAllRelationship()  //為了更新checkbox的單字列表
         setOpen(false)
     }
     return (

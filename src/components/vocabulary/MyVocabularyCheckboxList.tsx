@@ -17,7 +17,6 @@ function MyVocabularyAddToNoteCheckboxList({ note, vocabularys }: Props) {
         await addVocabularyToNote(note, { vocabularys_id: checkedList })
         //更新vocabularys
         getAllVocabularyIncludeAllRelationship()
-        // setOpen(false)
     }
     function onVocabularyChecked(id: number) {
         setCheckedList([...Array.from(new Set<number>(checkedList).add(id))])

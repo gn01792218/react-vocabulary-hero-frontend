@@ -8,7 +8,6 @@ interface Props {
     vocabulary: Vocabulary | undefined
 }
 function VocabularyDetailCardForNote({ editable, vocabulary }: Props) {
-    const navigate = useNavigate()
     const { deleteVocabulary } = useVocabulary()
     const { currentNote, updateStoreCurrentNote } = useNote()
     const [openCreateExampleForm, setOpenCreateExampleForm] = useState(false)
