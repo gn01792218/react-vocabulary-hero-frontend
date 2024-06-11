@@ -1,10 +1,8 @@
 
 import useAuth from "../hooks/auth/useAuth"
 import useUser from "../hooks/user/useUser"
-import { useAppSelector } from "../store/hooks"
 function TheHeader() {
-    const accessToken = useAppSelector((state)=>state.auth.accessToken)
-    const { logOut } = useAuth()
+    const { logOut, accessToken } = useAuth()
     const { user } = useUser()
     return (
         <div className='text-white'>

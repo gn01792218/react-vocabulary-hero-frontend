@@ -9,6 +9,7 @@ import useUserApi from "../user/useUserApi"
 export default function useAuth() {
     const navigate = useNavigate()
     const refreshToken = useAppSelector((state) => state.auth.refreshToken)
+    const accessToken = useAppSelector((state)=>state.auth.accessToken)
     const dispatch = useDispatch()
     const { loginRequest, signUpRequest, refreshTokenRequest, logOutRequest } = useAuthApi()
     const { getUserRequest } = useUserApi()
@@ -93,6 +94,7 @@ export default function useAuth() {
     return {
         //data
         refreshToken,
+        accessToken,
         //methods
         login,
         signUp,

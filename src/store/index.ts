@@ -1,17 +1,19 @@
 import { configureStore } from '@reduxjs/toolkit'
-import authReducer from './authSlice'  //引入reducer
-import userReducer from './userSlice'
+import auth from './authSlice'  //引入reducer
+import user from './userSlice'
 import vocabulary from './vocabularySlice'
-import loadingSlice from './loadingSlice'
-import noteSlice from './noteSlice'
+import loading from './loadingSlice'
+import note from './noteSlice'
+import speech from './speechSlice'
 
 const store = configureStore({
   reducer: {
-    loading:loadingSlice,
-    auth: authReducer,
-    user: userReducer,
-    vocabulary:vocabulary,
-    note:noteSlice
+    loading,
+    auth,
+    user,
+    vocabulary,
+    note,
+    speech
   },
 })
 
