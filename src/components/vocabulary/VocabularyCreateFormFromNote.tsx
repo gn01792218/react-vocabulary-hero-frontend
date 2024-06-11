@@ -1,3 +1,4 @@
+import useNote from '../../hooks/note/useNote'
 import useVocabulary from '../../hooks/vocabulary/useVocabulary'
 import MyInput from '../MyInput'
 import MyModal from '../MyModal'
@@ -12,11 +13,13 @@ function VocabularyCreateFormFromNote({ noteId }: Props) {
         createVocabularyFromNote,
         onCreateVocabularyDataChange,
         onCreateExampleDataChange,
-        onCreateSentenceDataChange
+        onCreateSentenceDataChange,
     } = useVocabulary()
+    const { updateStoreCurrentNote } = useNote()
     const [open, setOpen] = useState(false)
     async function onSubmit() {
         await createVocabularyFromNote(noteId)
+        await updateStoreCurrentNote(noteId)
         setOpen(false)
     }
     return (

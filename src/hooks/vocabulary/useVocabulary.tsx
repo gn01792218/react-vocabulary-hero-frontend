@@ -46,6 +46,7 @@ export default function useVocabulary() {
     }
     async function getAllVocabularyIncludeAllRelationship() {
         const vocabularys = await getAllVocabularyIncludeAllRelationshipRequest()
+        console.log(vocabularys)
         if (vocabularys) dispatch(setVocabularys([...vocabularys]))
     }
     async function createVocabulary() {
@@ -70,12 +71,6 @@ export default function useVocabulary() {
         if (!sentenceFormData.en) return console.log('沒有填寫句子，不建立句子')
         const stence = await createStence(example.id, vocabulary.id)
         if (!stence) return console.log('建立句子失敗')
-        //更新currentNote
-        if (!currentNote) return
-        dispatch(setCurrentNote({
-            ...currentNote,
-            vocabularys:[...currentNote.vocabularys, vocabulary]
-        }))
     }
     async function createExample(vocabularyId: number) {
         return await createExampleRequest(vocabularyId, exampleFormData)
