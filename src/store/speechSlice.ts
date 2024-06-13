@@ -14,7 +14,7 @@ interface State { // 定義 a type for the slice state
     volumn:1, //0-1
     pitch:1, //0-2,
     voices:[],
-    currentVoice:0
+    currentVoice:12 
   }
 
   //2.撰寫reducer函式

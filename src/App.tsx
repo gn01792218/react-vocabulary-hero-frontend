@@ -4,9 +4,7 @@ import useAuth from './hooks/auth/useAuth'
 import LoadingModal from './components/LoadingModal'
 import useUser from './hooks/user/useUser'
 import SpeechSelect from './components/SpeechSelect'
-import { useSpeech } from './hooks/useSpeech'
 function App() {
-
   const { refreshToken, getUserInformation } = useAuth()
   const { initUser } = useUser() 
   useEffect(()=>{

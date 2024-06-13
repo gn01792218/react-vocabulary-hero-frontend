@@ -33,6 +33,7 @@ export function useSpeech() {
   return {
     //data
     voices,
+    currentVoiceNumber,
     //method
     getVoices,
     speak,
