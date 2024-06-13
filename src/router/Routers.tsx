@@ -22,8 +22,8 @@ function Routers() {
           <Route path="/EditVocabulary/:vocabularyId" element={<EditVocabulary />} />
           <Route path="/NoteDetial/:noteId" element={<NoteDetial />} />
           <Route path="/EditNote/:noteId" element={<EditNote />} />
-        </Route>
           <Route path="/Login" element={<Login />} />
+        </Route>
           <Route path="/SignUp" element={<SignUp />} />
         </Routes>
       </Suspense>
