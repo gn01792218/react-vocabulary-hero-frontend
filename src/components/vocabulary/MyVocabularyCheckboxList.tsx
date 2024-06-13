@@ -2,6 +2,7 @@ import useNote from '../../hooks/note/useNote'
 import useVocabulary from '../../hooks/vocabulary/useVocabulary'
 import { Note } from '../../types/note'
 import { Vocabulary } from '../../types/vocabulary'
+import MyButton from '../MyButton'
 import MyCheckbox from '../MyCheckbox'
 import MyModal from '../MyModal'
 interface Props {
@@ -51,7 +52,7 @@ function MyVocabularyAddToNoteCheckboxList({ note, vocabularys }: Props) {
                 </ul>
                 <button onClick={onSubmit}>加進此筆記內</button>
             </MyModal>
-            <button className='border-2 border-orange-600' onClick={()=>setOpen(true)}>+已有的單字</button>
+            <MyButton label='+入已有單字' style='bg-green-200' onClick={()=>setOpen(true)}/>
         </>
     )
 }

@@ -1,4 +1,5 @@
 import useVocabulary from '../../hooks/vocabulary/useVocabulary'
+import MyButton from '../MyButton'
 import MyInput from '../MyInput'
 import MyModal from '../MyModal'
 function VocabularyCreateForm() {
@@ -34,7 +35,7 @@ function VocabularyCreateForm() {
                     <button className='border-green-200 border-2 p-3' onClick={onSubmit}>建立新單字</button>
                 </section>
             </MyModal>
-            <button className='border-2 border-green-700' onClick={()=>setOpen(true)}>+新增單字</button>
+            <MyButton label='+建立單字' style='bg-red-200' onClick={()=>setOpen(true)}/>
         </>
     )
 }

@@ -34,7 +34,7 @@ function NoteDetailCard({ editable, note }: Props) {
                 }
                 {
                     note?.id && 
-                    <section>
+                    <section className="flex justify-around">
                         <VocabularyCreateFormFromNote noteId={note.id}/>
                         <MyVocabularyAddToNoteCheckboxList note={note} vocabularys={vocabularys.filter(v=>v.userId === user?.id)}/>
                     </section>

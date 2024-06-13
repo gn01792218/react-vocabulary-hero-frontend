@@ -22,14 +22,15 @@ function Home() {
     }, [user])
     return (
         <div className=''>
-            <h1>歡迎來到單字救星</h1>
-            <section className='w-[200px] flex justify-around'>
+            <section className='flex justify-around mb-5'>
                 <NoteCreateForm />
                 <VocabularyCreateForm />
-                <ImageToTextConvertor/>
             </section>
-            <section>
-                我的筆記
+            <section className='w-[130px] ml-auto'>
+                <ImageToTextConvertor />
+            </section>
+            <section className='mb-5'>
+                <p className='text-white font-bold text-xl shadow-2xl'>我的筆記</p>
                 <NoteList notes={notes} />
             </section>
             <section>

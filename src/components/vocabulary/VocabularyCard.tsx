@@ -2,6 +2,7 @@ import { useSpeech } from "../../hooks/useSpeech"
 import useVocabulary from "../../hooks/vocabulary/useVocabulary"
 import { Example, Vocabulary } from "../../types/vocabulary"
 import ExampleCard from "./ExampleCard"
+import MyDropdownMenu from "../MyDropdownMenu"
 
 interface Props {
     vocabulary: Vocabulary,
@@ -21,12 +22,11 @@ function VocabularyCard({ vocabulary }: Props) {
     }
    
     return (
-        <div className='border-red-200 border-2 p-5'>
+        <div className='border-white bg-red-300 border-2 p-5 rounded-md'>
             <div className="cursor-pointer flex">
                 <p onClick={goToVocabularyDetial}>{vocabulary.spelling} {vocabulary.pronunciation}</p>
                 <button className="bg-red-500" onClick={()=>speak(vocabulary.spelling)}>發音</button>
             </div>
-            <button onClick={onGetExamplesAndStencesButtonClick} className="border-1 border-green-200">看解釋和例句</button>
             {
                 examples.length ?
                     <ul>
@@ -40,7 +40,16 @@ function VocabularyCard({ vocabulary }: Props) {
                     </ul> :
                     <p>尚無解釋</p>
             }
-            <button className="border-2 border-green-500" onClick={() => navigate(`EditVocabulary/${vocabulary.id}`)}>編輯單字</button>
+            <MyDropdownMenu title="options" items={[
+                {
+                    label:'看解釋和例句',
+                    onClick:onGetExamplesAndStencesButtonClick
+                },
+                {
+                    label: "編輯",
+                    onClick:()=> navigate(`EditVocabulary/${vocabulary.id}`)
+                }
+            ]} />
         </div>
     )
 }

@@ -1,4 +1,5 @@
 import useNote from '../../hooks/note/useNote'
+import MyButton from '../MyButton'
 import MyInput from '../MyInput'
 import MyModal from '../MyModal'
 function NoteCreateForm() {
@@ -23,7 +24,7 @@ function NoteCreateForm() {
                     <button className='border-green-200 border-2 p-3' onClick={onSubmit}>建立筆記</button>
                 </section>
             </MyModal>
-            <button className='border-2 border-yellow-700' onClick={()=>setOpen(true)}>+建立筆記</button>
+            <MyButton label='+建立筆記' style='bg-gray-200' onClick={()=>setOpen(true)}/>
         </>
     )
 }

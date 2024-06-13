@@ -1,5 +1,6 @@
 import useNote from '../../hooks/note/useNote'
 import useVocabulary from '../../hooks/vocabulary/useVocabulary'
+import MyButton from '../MyButton'
 import MyInput from '../MyInput'
 import MyModal from '../MyModal'
 interface Props {
@@ -28,7 +29,7 @@ function VocabularyCreateFormFromNote({ noteId }: Props) {
     return (
         <>
             <MyModal open={open} backdrop={true} onClose={() => setOpen(false)} title='新增單字'>
-                <section className='border-2'>
+                <section className='border-2 pt-5'>
                     <div>
                         <MyInput label='單字' description='請輸入這個單字' filedName="spelling" value={vocabularyFormData.spelling} onChange={onCreateVocabularyDataChange} />
                         <MyInput label='發音' description='請輸入單字發音' filedName="pronunciation" value={vocabularyFormData.pronunciation} onChange={onCreateVocabularyDataChange} />
@@ -40,10 +41,10 @@ function VocabularyCreateFormFromNote({ noteId }: Props) {
                         <MyInput label='例句' description='請輸入例句' filedName="en" value={sentenceFormData.en} onChange={onCreateSentenceDataChange} />
                         <MyInput label='例句翻譯' description='請輸入例句翻譯' filedName="zh" value={sentenceFormData.zh} onChange={onCreateSentenceDataChange} />
                     </div>
-                    <button className='border-green-200 border-2 p-3' onClick={onSubmit}>建立新單字</button>
+                    <MyButton label='+建立單字' style='bg-blue-200 text-black my-5 block mx-auto' onClick={onSubmit}/>
                 </section>
             </MyModal>
-            <button className="border-2 border-green-500" onClick={()=>setOpen(true)}>+添加單字</button>
+            <MyButton label='+添加單字' style='bg-red-200' onClick={()=>setOpen(true)}/>
         </>
     )
 }

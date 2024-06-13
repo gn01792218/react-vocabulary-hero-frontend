@@ -10,10 +10,7 @@ function ImageToTextConvertor() {
         converImageToText(imageURL)
     }
     return (
-       <section>
-        <MyInput type="file" label="上傳圖片" onChange={handleImageUpload}/>
-        {/* <button onClick={()=>converImageToText('https://techmoon.xyz/wp-content/uploads/2022/01/freepik.png')}>圖片轉文字</button> */}
-       </section> 
+        <MyInput type="file" label="" onChange={handleImageUpload}/>
     )
 }
 export default ImageToTextConvertor
