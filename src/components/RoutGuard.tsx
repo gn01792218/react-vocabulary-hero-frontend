@@ -6,9 +6,9 @@ export default function RoutGuard() {
 	return (
 		<>
 			{(() => {
-				if(!user) return 
-				if (!user && currentRouterPathName !== '/Login/') return <Navigate to="/Login/" />
-				if(currentRouterPathName === '/Login/' && user) return <Navigate to="/" />
+				// if(!user) return 
+				// if (!user && currentRouterPathName !== '/Login/') return <Navigate to="/Login/" />
+				// if(currentRouterPathName === '/Login/' && user) return <Navigate to="/" />
 				return <Outlet />
 			})()}
 		</>

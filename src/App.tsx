@@ -7,10 +7,10 @@ import { useSpeech } from './hooks/useSpeech'
 function App() {
   const { refreshToken, getUserInformation } = useAuth()
   const { initUser } = useUser()
-  // const { getVoices } = useSpeech()
-  // useEffect(() => {
-  //   window.speechSynthesis.addEventListener('voiceschanged', getVoices);
-  // }, [])
+  const { getVoices } = useSpeech()
+  useEffect(() => {
+    window.speechSynthesis.addEventListener('voiceschanged', getVoices);
+  }, [])
   useEffect(() => {
     initUser()
   }, [])
