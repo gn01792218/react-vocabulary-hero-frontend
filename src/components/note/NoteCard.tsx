@@ -12,10 +12,10 @@ function NoteCard({ note }: Props) {
     }
     return (
         <div className='border-black bg-white rounded-md border-2 p-5 shadow-2xl'>
-            <div className="cursor-pointer py-2 flex" >
+            <div className="py-2 flex" >
                 <p>{note.title}</p>
                 <p>{note.description}</p>
-                <FcAdvance className="mr-5 ml-auto" size={25} onClick={goToNoteDetial}/>
+                <FcAdvance className="cursor-pointer mr-5 ml-auto" size={25} onClick={goToNoteDetial}/>
             </div>
             <MyDropdownMenu title="options" items={[
                 {
