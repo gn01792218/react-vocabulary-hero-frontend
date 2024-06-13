@@ -15,7 +15,8 @@ export function useSpeech() {
   const currentVoiceNumber = useAppSelector((state)=>state.speech.currentVoice)
 
   function getVoices(){
-    dispatch(setVoices([...window.speechSynthesis.getVoices()]))
+    const voices = window.speechSynthesis.getVoices() 
+    if(voices) dispatch(setVoices([...voices]))
   }
   function switchCurrentVoice(index:number){
     dispatch(setCurrentVoiceNumber(index))
