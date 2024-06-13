@@ -6,7 +6,7 @@ export default function RoutGuard() {
 	return (
 		<>
 			{(() => {
-				if(!user) return alert('無法獲取使用者資訊')
+				if(!user) return 
 				if (!user && currentRouterPathName !== '/Login/') return <Navigate to="/Login/" />
 				if(currentRouterPathName === '/Login/' && user) return <Navigate to="/" />
 				return <Outlet />

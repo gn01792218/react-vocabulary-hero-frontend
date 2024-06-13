@@ -13,8 +13,9 @@ function TheHeader() {
             {
                 user?
                 <section>
-                    <button className="mr-5" onClick={()=>logOut({accessToken})}>LogOut</button>
                     <p className="cursor-pointer text-gray-100" onClick={()=>navigate('/Setting')}>{user?.name}</p>
+                    <Link className="mr-5" to="/Setting">Setting</Link>
+                    <button className="mr-5" onClick={()=>logOut({accessToken})}>LogOut</button>
                 </section>
                 :
                 <div>
