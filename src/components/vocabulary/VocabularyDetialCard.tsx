@@ -2,6 +2,7 @@ import { Vocabulary } from "../../types/vocabulary"
 import ExampleCard from "./ExampleCard"
 import ExampleCreateForm from "./ExampleCreateForm"
 import useVocabulary from "../../hooks/vocabulary/useVocabulary"
+import VocabularyMeta from "./VocabularyMeta"
 interface Props {
     editable:boolean
     vocabulary: Vocabulary | undefined
@@ -25,7 +26,10 @@ function VocabularyDetailCard({ editable, vocabulary }: Props) {
     return (
         <div className='border-red-200 border-2 p-5'>
             <div>
-                <p>{vocabulary?.spelling} {vocabulary?.pronunciation}</p>
+                {
+                    vocabulary && 
+                    <VocabularyMeta vocabulary={vocabulary}/>
+                }
                 {
                     (editable && vocabulary) && 
                     <section>

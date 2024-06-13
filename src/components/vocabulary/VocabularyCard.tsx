@@ -1,8 +1,8 @@
-import { useSpeech } from "../../hooks/useSpeech"
 import useVocabulary from "../../hooks/vocabulary/useVocabulary"
 import { Example, Vocabulary } from "../../types/vocabulary"
 import ExampleCard from "./ExampleCard"
 import MyDropdownMenu from "../MyDropdownMenu"
+import VocabularyMeta from "./VocabularyMeta"
 
 interface Props {
     vocabulary: Vocabulary,
@@ -10,7 +10,6 @@ interface Props {
 function VocabularyCard({ vocabulary }: Props) {
     const navigate = useNavigate()
     const { getVocabularyIncludeExamplesAndStences } = useVocabulary()
-    const { speak } = useSpeech()
     const [examples, setExamples] = useState<Example[]>([])
     async function onGetExamplesAndStencesButtonClick() {
         const res = await getVocabularyIncludeExamplesAndStences(vocabulary.id)
@@ -23,10 +22,7 @@ function VocabularyCard({ vocabulary }: Props) {
    
     return (
         <div className='border-white bg-red-300 border-2 p-5 rounded-md'>
-            <div className="cursor-pointer flex">
-                <p onClick={goToVocabularyDetial}>{vocabulary.spelling} {vocabulary.pronunciation}</p>
-                <button className="bg-red-500" onClick={()=>speak(vocabulary.spelling)}>發音</button>
-            </div>
+            <VocabularyMeta vocabulary={vocabulary}/>
             {
                 examples.length ?
                     <ul>

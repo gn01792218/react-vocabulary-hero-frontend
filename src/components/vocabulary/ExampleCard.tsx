@@ -1,6 +1,7 @@
 import useNote from "../../hooks/note/useNote"
 import useVocabulary from "../../hooks/vocabulary/useVocabulary"
 import { Example } from "../../types/vocabulary"
+import Speakable from "../Speakable"
 import SentenceCreateForm from "./StenceCreateForm"
 
 interface Props {
@@ -50,7 +51,7 @@ function ExampleCard({ vocabularyId, example, editable, noteId }: Props) {
                         return (
                             <div key={sentence.id}>
                                 <div className="py-1">
-                                    <p>{sentence.en}</p>
+                                    <Speakable text={sentence.en}/>
                                     <p>{sentence.zh}</p>
                                 </div>
                                 {
