@@ -28,7 +28,7 @@ function VocabularyDetailCard({ editable, vocabulary }: Props) {
             <div>
                 {
                     vocabulary && 
-                    <VocabularyMeta vocabulary={vocabulary}/>
+                    <VocabularyMeta vocabulary={vocabulary} showGoDetailIcon={false}/>
                 }
                 {
                     (editable && vocabulary) && 

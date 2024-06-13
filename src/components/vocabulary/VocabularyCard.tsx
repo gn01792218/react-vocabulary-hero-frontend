@@ -16,13 +16,10 @@ function VocabularyCard({ vocabulary }: Props) {
         if (!res) return
         setExamples([...res?.examples])
     }
-    function goToVocabularyDetial() {
-        navigate(`/VocabularyDetial/${vocabulary.id}`)
-    }
    
     return (
         <div className='border-white bg-red-300 border-2 p-5 rounded-md'>
-            <VocabularyMeta vocabulary={vocabulary}/>
+            <VocabularyMeta vocabulary={vocabulary} showGoDetailIcon={true}/>
             {
                 examples.length ?
                     <ul>
