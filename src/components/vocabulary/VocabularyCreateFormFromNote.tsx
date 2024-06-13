@@ -10,7 +10,7 @@ function VocabularyCreateFormFromNote({ noteId }: Props) {
         vocabularyFormData,
         exampleFormData,
         sentenceFormData,
-        createVocabularyFromNote,
+        createVocabulary,
         onCreateVocabularyDataChange,
         onCreateExampleDataChange,
         onCreateSentenceDataChange,
@@ -19,7 +19,7 @@ function VocabularyCreateFormFromNote({ noteId }: Props) {
     const { updateStoreCurrentNote } = useNote()
     const [open, setOpen] = useState(false)
     async function onSubmit() {
-        const vocabulary =  await createVocabularyFromNote(noteId)
+        const vocabulary =  await createVocabulary(noteId)
         if(!vocabulary) return 
         await updateStoreCurrentNote(noteId)
         getAllVocabularyIncludeAllRelationship()  //為了更新checkbox的單字列表

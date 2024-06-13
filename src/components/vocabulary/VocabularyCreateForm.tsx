@@ -19,7 +19,6 @@ function VocabularyCreateForm() {
     return (
         <>
             <MyModal open={open} backdrop={true} title='建立單字' onClose={()=>setOpen(false)}>
-
                 <section className='border-2'>
                     <div>
                         <MyInput label='單字' description='請輸入這個單字' filedName="spelling" value={vocabularyFormData.spelling} onChange={onCreateVocabularyDataChange} />

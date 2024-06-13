@@ -21,7 +21,6 @@ export default function useVocabulary() {
         deleteExampleRequest,
         deleteSentenceRequest
     } = useVocabularyApi()
-    const { currentNote } = useNote()
     const vocabularys = useAppSelector((state) => state.vocabulary.vocabularys)
     const currentVocabulary = useAppSelector((state) => state.vocabulary.currentVocabulary)
     const [vocabularyFormData, setVocabularyFormData] = useState<CreateVocabularyRequest>({
@@ -49,21 +48,12 @@ export default function useVocabulary() {
         console.log(vocabularys)
         if (vocabularys) dispatch(setVocabularys([...vocabularys]))
     }
-    async function createVocabulary() {
+    async function createVocabulary(noteId?: number) {
         if (!vocabularyFormData.spelling) return alert('請填寫單字!!!')
         if (!exampleFormData.definition) return alert('請填寫解釋!')
-        const vocabulary = await createVocabularyRequest(vocabularyFormData)
-        if (!vocabulary) return
-        dispatch(setVocabularys([...vocabularys, vocabulary])) //推到共用的地方去 
-        const example = await createExample(vocabulary.id)
-        if (!example) return console.log('example創建出了問題')
-        if (!sentenceFormData.en) return console.log('沒有填寫句子，不建立句子')
-        createStence(example.id, vocabulary.id)
-    }
-    async function createVocabularyFromNote(noteId: number) {
-        if (!vocabularyFormData.spelling) return alert('請填寫單字!!!')
-        if (!exampleFormData.definition) return alert('請填寫解釋!')
-        const vocabulary = await createVocabularyFromNoteRequest({ ...vocabularyFormData, noteId })
+        let vocabulary:Vocabulary | undefined
+        if(noteId) vocabulary = await createVocabularyFromNoteRequest({ ...vocabularyFormData, noteId })
+        else vocabulary = await createVocabularyRequest(vocabularyFormData) 
         if (!vocabulary) return console.log('建立單字失敗!')
         dispatch(setVocabularys([...vocabularys, vocabulary])) //推到共用的地方去 
         const example = await createExample(vocabulary.id)
@@ -71,6 +61,7 @@ export default function useVocabulary() {
         if (!sentenceFormData.en) return console.log('沒有填寫句子，不建立句子')
         const stence = await createStence(example.id, vocabulary.id)
         if (!stence) return console.log('建立句子失敗')
+        resetCreateFormData()
         return vocabulary
     }
     async function createExample(vocabularyId: number) {
@@ -125,6 +116,11 @@ export default function useVocabulary() {
             [name]: value
         }));
     };
+    function resetCreateFormData() {
+        setVocabularyFormData({...{spelling: '', pronunciation: ''}})
+        setExampleFormData({...{definition: ''}})
+        setSentenceFormData({...{en:'', zh:''}})
+    }
     return {
         //data
         vocabularys,
@@ -134,7 +130,6 @@ export default function useVocabulary() {
         sentenceFormData,
         //methods
         createVocabulary,
-        createVocabularyFromNote,
         createExample,
         createStence,
         getAllVocabulary,

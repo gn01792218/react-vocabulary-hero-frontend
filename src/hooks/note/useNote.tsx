@@ -32,6 +32,7 @@ export default function useNote() {
         if (!noteFormData.title) return alert('請給這個筆記一個名稱!!!')
         const note = await createNoteRequest(noteFormData)
         if (!note) return
+        resetCreateNoteForm()
         dispatch(setNotes([...notes, note])) //推到共用的地方去 
     }
     async function deleteNote(noteId: number) {
@@ -66,6 +67,9 @@ export default function useNote() {
         const originVocabularyIdList = note.vocabularys.map(v => v.id)
         originVocabularyIdList.push(...payload)
         return originVocabularyIdList
+    }
+    function resetCreateNoteForm(){
+        setNoteFormData({...{ title: '',description: ''}})
     }
     return {
         //data
