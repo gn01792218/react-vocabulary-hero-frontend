@@ -2,10 +2,8 @@ import { Select, Label, Field } from '@headlessui/react'
 import { useSpeech } from '../hooks/useSpeech'
 
 export default function SpeechSelect() {
-    const { getVoices, voices, switchCurrentVoice, currentVoiceNumber  } = useSpeech()
-    useEffect(() => {
-        window.speechSynthesis.addEventListener('voiceschanged', getVoices);
-    }, [])
+    const { voices, switchCurrentVoice, currentVoiceNumber  } = useSpeech()
+   
     return (
         <Field>
             <Label>選擇語音</Label>

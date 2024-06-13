@@ -4,6 +4,7 @@ import useUser from "../hooks/user/useUser"
 function TheHeader() {
     const { logOut, accessToken } = useAuth()
     const { user } = useUser()
+    const navigate = useNavigate()
     return (
         <div className='text-white'>
            <nav className="flex justify-center">
@@ -13,7 +14,7 @@ function TheHeader() {
                 user?
                 <section>
                     <button className="mr-5" onClick={()=>logOut({accessToken})}>LogOut</button>
-                    <p className="text-gray-100">{user?.name}</p>
+                    <p className="cursor-pointer text-gray-100" onClick={()=>navigate('/Setting')}>{user?.name}</p>
                 </section>
                 :
                 <div>
