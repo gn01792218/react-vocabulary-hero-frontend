@@ -10,6 +10,7 @@ function App() {
   const { getVoices } = useSpeech()
   useEffect(() => {
     window.speechSynthesis.addEventListener('voiceschanged', getVoices);
+    getVoices() //為了蘋果手機得這樣做bj4
   }, [])
   useEffect(() => {
     initUser()

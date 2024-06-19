@@ -16,8 +16,6 @@ export function useSpeech() {
 
   function getVoices(){
     const voices = window.speechSynthesis.getVoices() 
-    console.log(voices)
-    // alert(`有無voice${voices}`)
     if(voices) dispatch(setVoices([...voices]))
   }
   function switchCurrentVoice(index:number){
