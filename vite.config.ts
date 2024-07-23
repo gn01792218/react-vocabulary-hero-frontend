@@ -32,7 +32,7 @@ const mainfestForPlugin: Partial<VitePWAOptions> = {
         src:"/maskable_icon.png",
         sizes:"225x225",
         type:"image/png",
-        purpose:"any maskable"  
+        purpose:"any maskable"  //這一個非所有瀏覽器都支援
       },
     ],
     theme_color:"#171717",
