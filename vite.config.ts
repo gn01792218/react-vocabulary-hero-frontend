@@ -35,7 +35,7 @@ const mainfestForPlugin: Partial<VitePWAOptions> = {
         purpose:"any maskable"  
       },
     ],
-    // theme_color:"#171717", //必須要配合其他設定，才能使用
+    theme_color:"#171717",
     background_color:'#000000',
     display:"standalone",
     scope:"/",
