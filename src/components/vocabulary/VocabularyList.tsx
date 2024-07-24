@@ -6,7 +6,7 @@ interface Props{
 }
 function VocabularyList({vocabularys}:Props){
     return (
-        <ul >
+        <ul className='grid grid-cols-2 gap-1 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6'>
             {   vocabularys.length?
                 vocabularys.map((v) => {
                     return (

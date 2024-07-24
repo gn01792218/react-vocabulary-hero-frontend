@@ -2,4 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+.my-text-overflow{
+    @apply truncate;
+}
+.my-text-overflow-3{
+    @apply truncate;
+    line-clamp: 3;
+    -webkyt-line-clamp:3
+}
 

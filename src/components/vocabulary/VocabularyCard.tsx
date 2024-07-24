@@ -18,7 +18,7 @@ function VocabularyCard({ vocabulary }: Props) {
     }
    
     return (
-        <div className='border-white bg-red-300 border-2 p-5 rounded-md'>
+        <div className='border-white bg-red-300 border-2 p-3 rounded-md min-h-[145px]'>
             <VocabularyMeta vocabulary={vocabulary} showGoDetailIcon={true}/>
             {
                 examples.length ?
@@ -31,7 +31,7 @@ function VocabularyCard({ vocabulary }: Props) {
                             })
                         }
                     </ul> :
-                    <p>尚無解釋</p>
+                    <p className="text-xs text-gray-500">尚無解釋</p>
             }
             <MyDropdownMenu title="options" items={[
                 {

@@ -12,13 +12,15 @@ function VocabularyMeta({ vocabulary, showGoDetailIcon }: Props) {
         navigate(`/VocabularyDetial/${vocabulary.id}`)
     }
     return (
-        <div className="cursor-pointer flex">
-            <Speakable text={vocabulary.spelling} />
-            <p className="mr-2">{vocabulary.pronunciation}</p>
+        <div className="cursor-pointer">
             {
                 showGoDetailIcon &&
-                <FcAdvance className="mr-5 ml-auto" size={25} onClick={goToVocabularyDetial} />
+                <div className="flex items-center text-xs" onClick={goToVocabularyDetial}>
+                    <p className="ml-auto mr-1 text-gray-500">查看</p>
+                    <FcAdvance className="cursor-pointer" size={25} />
+                </div>
             }
+            <Speakable text={vocabulary.spelling} pronunciation={vocabulary.pronunciation}/>
         </div>
     )
 }
