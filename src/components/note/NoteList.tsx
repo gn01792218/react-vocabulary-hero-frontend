@@ -8,7 +8,7 @@ function NoteList({notes}:Props){
     const { user } = useUser()
     
     return (
-        <ul >
+        <ul className=' grid grid-cols-2 gap-1'>
             {   notes.length?
                 notes.filter(n=>n.userId === user?.id).map((v) => {
                     return (
