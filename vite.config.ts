@@ -6,7 +6,7 @@ const { resolve } = require("path");
 // PWA setting
 const mainfestForPlugin: Partial<VitePWAOptions> = {
   registerType:"prompt",
-  includeAssets:["favicon.ico","apple-touch-icon.png","masked-icon.svg"],
+  includeAssets:["favicon.ico"],
   manifest:{
     name:"Vocabulary-hero",
     short_name:"Vocabulary-hero",
