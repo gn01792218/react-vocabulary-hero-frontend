@@ -10,7 +10,9 @@ function Routers() {
   const VocabularyDetial = lazy(() => import('../views/VocabularyDetial'))
   const EditVocabulary = lazy(() => import('../views/EditVocabulary'))
   const NoteDetial = lazy(() => import('../views/NoteDetial'))
+  const TestPaperDetial = lazy(() => import('../views/TestPaperDetial'))
   const EditNote = lazy(() => import('../views/EditNote'))
+  const EditTestPaper = lazy(() => import('../views/EditTestPaper'))
   const Setting = lazy(()=>import('../views/Setting'))
   return (
     <div className="App">
@@ -22,7 +24,9 @@ function Routers() {
           <Route path="/VocabularyDetial/:vocabularyId" element={<VocabularyDetial />} />
           <Route path="/EditVocabulary/:vocabularyId" element={<EditVocabulary />} />
           <Route path="/NoteDetial/:noteId" element={<NoteDetial />} />
+          <Route path="/TestPaperDetial/:testPaperId" element={<TestPaperDetial />} />
           <Route path="/EditNote/:noteId" element={<EditNote />} />
+          <Route path="/EditTestPaper/:testPaperId" element={<EditTestPaper />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Setting" element={<Setting />} />
         </Route>

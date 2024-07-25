@@ -5,6 +5,7 @@ import vocabulary from './vocabularySlice'
 import loading from './loadingSlice'
 import note from './noteSlice'
 import speech from './speechSlice'
+import testPaperSlice from './testPaperSlice'
 
 const store = configureStore({
   reducer: {
@@ -13,7 +14,8 @@ const store = configureStore({
     user,
     vocabulary,
     note,
-    speech
+    speech,
+    testPaperSlice
   },
 })
 
