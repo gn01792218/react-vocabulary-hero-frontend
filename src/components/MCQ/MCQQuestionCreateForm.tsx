@@ -25,7 +25,8 @@ function MCQQuestionCreateForm({ testPaperId }: Props) {
                     <div>
                         <MyInput label='題目' description='請輸入題目敘述' filedName="question" value={MCQQuestionFormData.question} onChange={onCreateMCQQuestionDataChange} />
                         <MySwitch
-                            label='分享題目'
+                            label='分享題目 : '
+                            description='和別的使用者分享此題目'
                             filedName='share'
                             checked={MCQQuestionFormData.share}
                             onChange={onSwitchChange}

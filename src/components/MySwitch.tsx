@@ -1,14 +1,24 @@
 import { Switch, Label, Field } from '@headlessui/react'
 interface Props {
-    label: string,
+    label: string
+    description?: string
     filedName: string
     checked: boolean
-    onChange: (fieldName: string, checked: boolean) => void;
+    onChange: (fieldName: string, checked: boolean) => void
 }
-export default function MySwitch({ label, onChange, checked, filedName }: Props) {
+export default function MySwitch({ label, description, onChange, checked, filedName }: Props) {
     return (
         <Field>
-            <Label>{ label }</Label>
+            <div className='flex'>
+            <Label>{label}{checked}</Label>
+            {
+                checked ? <p className='text-green-500'>是</p> : <p className='text-red-300'>否</p>
+            }
+            </div>
+            {
+                description &&
+                <p className="text-sm">{description}</p>
+            }
             <Switch
                 checked={checked}
                 onChange={(checked) => onChange(filedName, checked)}
