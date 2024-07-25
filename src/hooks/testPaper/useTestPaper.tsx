@@ -16,8 +16,8 @@ export default function useTestPaper() {
         deleteTestPaperRequest,
         updateTestPaper,
     } = useTestPaperApi()
-    const testPapers = useAppSelector((state) => state.testPaperSlice.testPapers)
-    const currentTestPaper = useAppSelector((state) => state.testPaperSlice.currentTestPaper)
+    const testPapers = useAppSelector((state) => state.testPaper.testPapers)
+    const currentTestPaper = useAppSelector((state) => state.testPaper.currentTestPaper)
     const [testPaperFormData, setTestPaperFormData] = useState<TestPaperCreateRequestForm>({
         title: '',
         description: ''
@@ -34,7 +34,6 @@ export default function useTestPaper() {
         if (!testPaperFormData.title) return alert('請給這個考卷一個名稱!!!')
         const res = await createTestPaperRequest({
             ...testPaperFormData,
-            user_id: user?.id
         })
         if (!res) return
         resetCreateNoteForm()

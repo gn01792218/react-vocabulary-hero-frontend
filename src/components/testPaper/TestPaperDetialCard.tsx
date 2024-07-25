@@ -2,7 +2,7 @@ import { TestPaper } from "../../types/testPaper"
 import useTestPaper from "../../hooks/testPaper/useTestPaper"
 import useUser from "../../hooks/user/useUser"
 import MyVocabularyAddToNoteCheckboxList from "../vocabulary/MyVocabularyCheckboxList"
-import VocabularyCreateFormFromNote from "../vocabulary/VocabularyCreateFormFromNote"
+import MCQQUestionCreateForm from "../MCQ/MCQQuestionCreateForm"
 import VocabularyDetailListForNote from "../vocabulary/VocabularyDetailListForNote"
 interface Props {
     editable:boolean
@@ -31,12 +31,13 @@ function TestPaperDetailCard({ editable, testPage }: Props) {
                     </section>
                 }
                 {
-                    // testPage?.id && 
-                    // <section className="flex justify-around">
-                    //     {/* 這裡是建立選擇題的按鈕 */}
-                    //     <VocabularyCreateFormFromNote noteId={testPage.id}/>
-                    //                             <MyVocabularyAddToNoteCheckboxList note={note} vocabularys={vocabularys.filter(v=>v.userId === user?.id)}/>
-                    // </section>
+                    user?.id &&
+                    testPage?.id && 
+                    <section className="flex justify-around">
+                        {/* 這裡是建立選擇題的按鈕 */}
+                        <MCQQUestionCreateForm testPaperId={testPage.id} userId={user.id}/>
+                        {/* <MyVocabularyAddToNoteCheckboxList note={note} vocabularys={vocabularys.filter(v=>v.userId === user?.id)}/> */}
+                    </section>
                 }     
                 ----------------------------------------------------------------------------------------
                 {
