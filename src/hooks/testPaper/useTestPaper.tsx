@@ -20,7 +20,8 @@ export default function useTestPaper() {
     const currentTestPaper = useAppSelector((state) => state.testPaper.currentTestPaper)
     const [testPaperFormData, setTestPaperFormData] = useState<TestPaperCreateRequestForm>({
         title: '',
-        description: ''
+        description: '',
+        share:true
     })
     async function getAllTestPapers() {
         const res = await getAllTestPaperRequest()
@@ -50,13 +51,19 @@ export default function useTestPaper() {
             [name]: value
         }));
     };
+    function onSwitchChange(fieldName: string, checked: boolean) {
+        setTestPaperFormData(prevState => ({
+            ...prevState,
+            [fieldName]: checked
+        }));
+    }
     async function updateStoreCurrentTestPaper(testPaper: number) {
         const res = await getTestPaper(testPaper)
         console.log('取得testPaper',res)
         if (res) dispatch(setCurrentTestPaper({ ...res }))
     }
     function resetCreateNoteForm() {
-        setTestPaperFormData({ ...{ title: '', description: '' } })
+        setTestPaperFormData({ ...{ title: '', description: '',share:true } })
     }
     return {
         //data
@@ -70,6 +77,7 @@ export default function useTestPaper() {
         deleteTestPaper,
         updateStoreCurrentTestPaper,
         onCreateTestPaperDataChange,
+        onSwitchChange
     }
 
 }
