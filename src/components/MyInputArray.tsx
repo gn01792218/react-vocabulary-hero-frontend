@@ -15,7 +15,7 @@ export default function MyInputArray({title, targetArrayData, addInput, removeIn
             {
                 targetArrayData.map((i, index) => {
                     return (
-                        <div className='flex justify-between'>
+                        <div className='flex justify-between' key={index}>
                             <MyInput value={i} onChange={(e) => onChange(e, index)} />
                             <button onClick={() => removeInput(index)}>-移除</button>
                         </div>

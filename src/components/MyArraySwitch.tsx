@@ -6,7 +6,7 @@ interface Props {
     index:number
     onChange: (index: number, checked: boolean) => void
 }
-export default function MySwitch({ label, description, onChange, checked,index }: Props) {
+export default function MyArraySwitch({ label, description, onChange, checked,index }: Props) {
     return (
         <Field>
             <div className='flex'>

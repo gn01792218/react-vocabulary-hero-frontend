@@ -14,14 +14,14 @@ export interface MCQQuestionCreateRequestForm{
     solutions:string[],
     tags:string[],
     share:boolean,
-    options:MCQQuestionOption[],
+    options:MCQQuestionOptionCreateFormData[],
 }
 export interface MCQQuestionCreateRequest{
     question:string,
     solutions:string[],
     tags:string[],
     share:boolean,
-    options:MCQQuestionOption[],
+    options:MCQQuestionOptionCreateFormData[],
     test_paper_id:number
 }
 export interface MCQQuestionUpdateRequest{
@@ -31,6 +31,11 @@ export interface MCQQuestionUpdateRequest{
     share:boolean,
 }
 export interface MCQQuestionOption{
+    id:number,
+    content:string,
+    is_answer:boolean
+}
+export interface MCQQuestionOptionCreateFormData{
     content:string,
     is_answer:boolean
 }
