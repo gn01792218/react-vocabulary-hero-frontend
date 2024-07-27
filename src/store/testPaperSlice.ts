@@ -33,6 +33,6 @@ export const { setTestPapers, setCurrentTestPaper } = slice.actions
 
 //4.導出state
 //Other code such as selectors can use the imported `RootState` type
-export const TestPapers = (state: RootState) => state.testPaperSlice.testPapers
+export const TestPapers = (state: RootState) => state.testPaper.testPapers
 
 export default slice.reducer

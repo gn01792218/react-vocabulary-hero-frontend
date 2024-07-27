@@ -5,6 +5,8 @@ import { MCQQuestion, MCQQuestionCreateRequest, MCQQuestionUpdateRequest, MCQQue
 import useMCQApi from "./useMCQApi"
 import { setCurrentMCQQuestion, setMCQs } from "../../store/mCQSlice"
 import useUser from "../user/useUser"
+import { isTypedArray } from "util/types"
+import MCQQuestionCreateForm from "../../components/MCQ/MCQQuestionCreateForm"
 
 export default function useMCQ() {
     const dispatch = useDispatch()
@@ -25,6 +27,7 @@ export default function useMCQ() {
         tags: [],
         options: []
     })
+    const MCQQuestionSolutionsLimit = 3
     async function getAll() {
         const res = await getAllRequest()
         if (res) dispatch(setMCQs([...res]))
@@ -54,13 +57,33 @@ export default function useMCQ() {
             [name]: value
         }));
     };
+    function onMCQQuestionFormDataSolutionsChange(
+        e: React.ChangeEvent<HTMLInputElement>,
+        index: number
+    ) {
+        const { value } = e.target;
+        MCQQuestionFormData.solutions[index] = value
+        setMCQQuestionFormData(prevState => ({
+            ...prevState,
+            solutions:[...MCQQuestionFormData.solutions]
+        }));
+    }
+    function onMCQQuestionFormDataTagsChange(
+        e: React.ChangeEvent<HTMLInputElement>,
+        index: number
+    ) {
+        const { value } = e.target;
+        MCQQuestionFormData.tags[index] = value
+        setMCQQuestionFormData(prevState => ({
+            ...prevState,
+            tags:[...MCQQuestionFormData.tags]
+        }));
+    }
     function onSwitchChange(fieldName: string, checked: boolean) {
-        console.log(fieldName)
         setMCQQuestionFormData(prevState => ({
             ...prevState,
             [fieldName]: checked
         }));
-        console.log(checked)
     }
     async function updateStoreCurrent(testPaper: number) {
         const res = await getById(testPaper)
@@ -78,6 +101,67 @@ export default function useMCQ() {
             }
         })
     }
+    function addSolutionForm(){
+        MCQQuestionFormData.solutions.push("")
+        setMCQQuestionFormData(prevState => ({
+            ...prevState,
+            solutions:[...MCQQuestionFormData.solutions]
+        }));    
+    }
+    function removeSolution(index:number){
+        MCQQuestionFormData.solutions.splice(index,1)
+        setMCQQuestionFormData(prevState => ({
+            ...prevState,
+            solutions:[...MCQQuestionFormData.solutions]
+        }));
+    }
+    function addTagsForm(){
+        MCQQuestionFormData.tags.push("")
+        setMCQQuestionFormData(prevState => ({
+            ...prevState,
+            tags:[...MCQQuestionFormData.tags]
+        }));    
+    }
+    function removeTags(index:number){
+        MCQQuestionFormData.tags.splice(index,1)
+        setMCQQuestionFormData(prevState => ({
+            ...prevState,
+            tags:[...MCQQuestionFormData.tags]
+        }));
+    }
+     function addOptionForm(){
+        MCQQuestionFormData.options.push({content:"",is_answer:false})
+        setMCQQuestionFormData(prevState => ({
+            ...prevState,
+            tags:[...MCQQuestionFormData.tags]
+        }));    
+    }
+    function removeOption(index:number){
+        MCQQuestionFormData.options.splice(index,1)
+        setMCQQuestionFormData(prevState => ({
+            ...prevState,
+            tags:[...MCQQuestionFormData.tags]
+        }));
+    }
+    function onMCQQuestionOptionContentChange(
+        e: React.ChangeEvent<HTMLInputElement>,
+        index: number
+    ) {
+        const { value } = e.target;
+        MCQQuestionFormData.options[index].content = value
+        setMCQQuestionFormData(prevState => ({
+            ...prevState,
+            options:[...MCQQuestionFormData.options]
+        }));
+    }
+    function onMCCQQuestionOptionIsAnswerSwitchChange(index: number, checked: boolean) {
+        MCQQuestionFormData.options[index].is_answer = checked
+        console.log(index, checked)
+        setMCQQuestionFormData(prevState => ({
+            ...prevState,
+            options: [...MCQQuestionFormData.options]
+        }));
+    }
     return {
         //data
         MCQs,
@@ -90,7 +174,17 @@ export default function useMCQ() {
         deleteById,
         updateStoreCurrent,
         onCreateMCQQuestionDataChange,
-        onSwitchChange
+        onMCQQuestionFormDataSolutionsChange,
+        onMCQQuestionFormDataTagsChange,
+        onMCQQuestionOptionContentChange,
+        onSwitchChange,
+        onMCCQQuestionOptionIsAnswerSwitchChange,
+        addSolutionForm,
+        removeSolution,
+        addTagsForm,
+        removeTags,
+        addOptionForm,
+        removeOption
     }
 
 }

@@ -1,8 +1,10 @@
 import useMCQ from '../../hooks/MCQ/useMCQ'
 import MyButton from '../MyButton'
 import MyInput from '../MyInput'
+import MyInputArray from '../MyInputArray'
 import MyModal from '../MyModal'
 import MySwitch from '../MySwitch'
+import MCQQuestionOptionCreateForm from './MCQQuestionOptionCreateForm'
 interface Props {
     testPaperId: number,
 }
@@ -11,12 +13,29 @@ function MCQQuestionCreateForm({ testPaperId }: Props) {
         MCQQuestionFormData,
         create,
         onCreateMCQQuestionDataChange,
-        onSwitchChange
+        onMCQQuestionFormDataSolutionsChange,
+        onMCQQuestionFormDataTagsChange,
+        onMCQQuestionOptionContentChange,
+        onSwitchChange,
+        onMCCQQuestionOptionIsAnswerSwitchChange,
+        addSolutionForm,
+        removeSolution,
+        addTagsForm,
+        removeTags,
+        addOptionForm,
+        removeOption
     } = useMCQ()
     const [open, setOpen] = useState(false)
     async function onSubmit() {
+        console.log(MCQQuestionFormData)
+        //檢查沒有選項就不建立
+        if(!MCQQuestionFormData.options.length) return alert('請為題目建立選項!')
+        if(!checkOptionsHaveAtLestOneAnswer()) return alert('請設置一個正確答案!')
         await create(testPaperId)
         setOpen(false)
+    }
+    function checkOptionsHaveAtLestOneAnswer(){
+        return MCQQuestionFormData.options.some(option=>option.is_answer)
     }
     return (
         <>
@@ -31,6 +50,12 @@ function MCQQuestionCreateForm({ testPaperId }: Props) {
                             checked={MCQQuestionFormData.share}
                             onChange={onSwitchChange}
                         />
+                        -----------------------
+                        <MCQQuestionOptionCreateForm optionsData={MCQQuestionFormData.options} addInput={addOptionForm} removeInput={removeOption} onOptionContentChange={onMCQQuestionOptionContentChange} onOptionIsAnswerChange={onMCCQQuestionOptionIsAnswerSwitchChange}/>
+                        -----------------------
+                        <MyInputArray title='+解析' targetArrayData={MCQQuestionFormData.solutions} addInput={addSolutionForm} removeInput={removeSolution} onChange={onMCQQuestionFormDataSolutionsChange}/>
+                        --------------------
+                        <MyInputArray title='+tag' targetArrayData={MCQQuestionFormData.tags} addInput={addTagsForm} removeInput={removeTags} onChange={onMCQQuestionFormDataTagsChange}/>
                     </div>
                     <button className='border-green-200 border-2 p-3' onClick={onSubmit}>建立</button>
                 </section>

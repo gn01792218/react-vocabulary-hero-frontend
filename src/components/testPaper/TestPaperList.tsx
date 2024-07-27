@@ -10,7 +10,7 @@ function TestPaperList({items}:Props){
     return (
         <ul className='grid grid-cols-2 gap-1 md:grid-cols-3 lg:grid-cols-4'>
             {   items.length?
-                items.filter(i=>i.user_id === user?.id).map((v) => {
+                items.filter(i=>true).map((v) => {
                     return (
                         <li key={v.id}>
                             <TestPaperCard testPaper={v}/>

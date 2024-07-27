@@ -4,6 +4,7 @@ import useUser from "../../hooks/user/useUser"
 import MyVocabularyAddToNoteCheckboxList from "../vocabulary/MyVocabularyCheckboxList"
 import MCQQUestionCreateForm from "../MCQ/MCQQuestionCreateForm"
 import VocabularyDetailListForNote from "../vocabulary/VocabularyDetailListForNote"
+import MCQQuestionList from "../MCQ/MCQQuestionList"
 interface Props {
     editable:boolean
     testPage: TestPaper | undefined
@@ -35,14 +36,14 @@ function TestPaperDetailCard({ editable, testPage }: Props) {
                     testPage?.id && 
                     <section className="flex justify-around">
                         {/* 這裡是建立選擇題的按鈕 */}
-                        <MCQQUestionCreateForm testPaperId={testPage.id} userId={user.id}/>
+                        <MCQQUestionCreateForm testPaperId={testPage.id}/>
                         {/* <MyVocabularyAddToNoteCheckboxList note={note} vocabularys={vocabularys.filter(v=>v.userId === user?.id)}/> */}
                     </section>
                 }     
                 ----------------------------------------------------------------------------------------
                 {
-                    // testPage?.MCQs &&
-                    // <VocabularyDetailListForNote noteId={testPage.id} editable={editable} vocabularys={testPage?.MCQs}/>           
+                    testPage?.MCQs &&
+                   <MCQQuestionList MCQQuestions={testPage.MCQs}/> 
                 }
                  </div> 
         </div>
