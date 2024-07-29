@@ -11,3 +11,7 @@
     -webkyt-line-clamp:3
 }
 
+.my-drop-down-item {
+    @apply w-full block data-[focus]:bg-blue-100 rounded-md text-center p-1;
+}
+

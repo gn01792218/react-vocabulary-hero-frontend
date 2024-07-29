@@ -19,6 +19,7 @@ export default function useMCQ() {
     const {
         createRequest,
         getAllRequest,
+        getUserAllRequest,
         getByIdRequest,
         deleteRequest,
         updateRequest,
@@ -35,6 +36,9 @@ export default function useMCQ() {
     async function getAll() {
         const res = await getAllRequest()
         if (res) dispatch(setMCQs([...res]))
+    }
+    async function getUserAll() {
+        return await getUserAllRequest()
     }
     async function getById(testPaperId: number) {
         return await getByIdRequest(testPaperId)
@@ -140,7 +144,7 @@ export default function useMCQ() {
     }
     function addOptionForm() {
         MCQQuestionFormData.options.push({ content: "", is_answer: false })
-        setMCQQuestionFormData(prevState => ({ ...prevState, options:[...MCQQuestionFormData.options] }))
+        setMCQQuestionFormData(prevState => ({ ...prevState, options: [...MCQQuestionFormData.options] }))
     }
     function removeOption(index: number) {
         MCQQuestionFormData.options.splice(index, 1)
@@ -176,6 +180,7 @@ export default function useMCQ() {
         //methods
         create,
         getAll,
+        getUserAll,
         getById,
         deleteById,
         updateStoreCurrent,

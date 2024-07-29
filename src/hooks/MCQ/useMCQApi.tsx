@@ -5,6 +5,9 @@ export default function useNoteApi(){
     async function getAllRequest(){
         return await fetchData<MCQQuestion[]>('/MCQs','GET')
     }
+    async function getUserAllRequest(){
+        return await fetchData<MCQQuestion[]>('/MCQs/userAll','GET')
+    }
     async function getByIdRequest(id:number){
         return await fetchData<MCQQuestion>(`/MCQs/${id}`, "GET")
     }
@@ -20,6 +23,7 @@ export default function useNoteApi(){
     return {
         //methods
         getAllRequest,
+        getUserAllRequest,
         getByIdRequest,
         createRequest,
         deleteRequest,
