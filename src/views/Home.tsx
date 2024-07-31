@@ -32,16 +32,16 @@ function Home() {
         <div className=''>
             <section className='flex justify-around mb-5'>
                 <NoteCreateForm />
-                {/* <TestPaperCreateForm/> */}
+                <TestPaperCreateForm/>
                 <VocabularyCreateForm />
             </section>
             <section className='w-[130px] ml-auto'>
                 <ImageToTextConvertor />
             </section>
-            {/* <section className='mb-5'>
+            <section className='mb-5'>
                 <p className='text-white font-bold text-xl shadow-2xl'>我的考卷</p>
                 <TestPaperList items={testPapers} />
-            </section> */}
+            </section>
             <section className='mb-5'>
                 <p className='text-white font-bold text-xl shadow-2xl'>我的筆記</p>
                 <NoteList notes={notes} />
