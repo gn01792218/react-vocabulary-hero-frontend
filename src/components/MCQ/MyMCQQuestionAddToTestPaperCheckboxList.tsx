@@ -13,8 +13,9 @@ function MyMCQQuestionAddToTestPaperCheckboxList({ testPaper }: Props) {
     const [checkedList, setCheckedList] = useState<number[]>([])
     const [open, setOpen] = useState(false)
     useEffect(() => {
+        if(!open) return 
         getAll()
-    }, [])
+    },[open])
     async function onSubmit() {
         await addMCQQuestionToTestPaper(testPaper, { ids: checkedList })
         //更新MCQs
