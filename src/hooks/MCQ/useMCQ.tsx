@@ -1,11 +1,10 @@
 
 import { useDispatch } from "react-redux"
 import { useAppSelector } from '../../store/hooks'
-import { MCQQuestion, MCQQuestionCreateRequest, MCQQuestionUpdateRequest, MCQQuestionCreateRequestForm } from '../../types/MCQ'
+import { MCQQuestionCreateRequestForm } from '../../types/MCQ'
 import useMCQApi from "./useMCQApi"
 import { setCurrentMCQQuestion, setMCQs } from "../../store/mCQSlice"
 import useUser from "../user/useUser"
-import MCQQuestionCreateForm from "../../components/MCQ/MCQQuestionCreateForm"
 import useTestPaper from "../testPaper/useTestPaper"
 import useTestPaperApi from "../testPaper/useTestPaperApi"
 import { setCurrentTestPaper } from "../../store/testPaperSlice"
@@ -109,7 +108,6 @@ export default function useMCQ() {
     }
     async function updateStoreCurrent(testPaper: number) {
         const res = await getById(testPaper)
-        console.log('取得MCQ', res)
         if (res) dispatch(setCurrentMCQQuestion({ ...res }))
     }
     function resetCreateMCQQuestionForm() {
