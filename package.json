@@ -29,7 +29,7 @@
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.40",
     "tailwindcss": "^3.4.7",
-    "typescript": "^5.4.5",
+    "typescript": "^5.5.4",
     "unplugin-auto-import": "^0.12.1",
     "vite": "^5.3.4",
     "vite-plugin-pwa": "^0.20.0",
