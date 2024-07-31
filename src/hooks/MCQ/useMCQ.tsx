@@ -7,7 +7,7 @@ import useMCQApi from "./useMCQApi"
 import useUser from "../user/useUser"
 import useTestPaper from "../testPaper/useTestPaper"
 import useTestPaperApi from "../testPaper/useTestPaperApi"
-import { setCurrentMCQQuestion, setMCQs } from "../../store/mCQSlice"
+import { setCurrentMCQQuestion, setMCQs } from "../../store/MCQSlice"
 import { setCurrentTestPaper } from "../../store/testPaperSlice"
 
 export default function useMCQ() {

@@ -6,7 +6,7 @@ import loading from './loadingSlice'
 import note from './noteSlice'
 import speech from './speechSlice'
 import testPaper from './testPaperSlice'
-import MCQ from './mCQSlice'
+import MCQ from './MCQSlice'
 
 const store = configureStore({
   reducer: {
