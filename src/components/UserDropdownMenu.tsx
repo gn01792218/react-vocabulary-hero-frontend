@@ -20,11 +20,11 @@ function UserDropDownMenu() {
             設定
           </a>
         </MenuItem>
-        {/* <MenuItem>
+        <MenuItem>
           <a className="my-drop-down-item" onClick={()=>navigate('/MyTestQuestion')}>
             我的試題
           </a>
-        </MenuItem> */}
+        </MenuItem>
         <MenuItem>
           <a className="my-drop-down-item" href="/#" onClick={() => logOut({ accessToken })}>
               LogOut
