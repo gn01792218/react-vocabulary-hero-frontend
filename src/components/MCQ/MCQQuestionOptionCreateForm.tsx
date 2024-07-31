@@ -6,7 +6,7 @@ interface Props {
     addInput: () => void
     removeInput: (index: number) => void
     onOptionContentChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void
-    onOptionIsAnswerChange:(index:number, checked:boolean) => void
+    onOptionIsAnswerChange: (index: number, checked: boolean) => void
 }
 function MCQQuestionOptionCreateForm({ optionsData, addInput, removeInput, onOptionContentChange, onOptionIsAnswerChange }: Props) {
     return (
@@ -18,10 +18,12 @@ function MCQQuestionOptionCreateForm({ optionsData, addInput, removeInput, onOpt
                 {
                     optionsData?.map((option, index) => {
                         return (
-                            <div className='flex justify-between' key={index}>
-                                <MyInput value={option.content} onChange={(e) => onOptionContentChange(e, index)} />
-                                <MyArraySwitch label="是否為答案" index={index} checked={option.is_answer} onChange={onOptionIsAnswerChange}/>
-                                <button onClick={() => removeInput(index)}>-移除</button>
+                            <div className='flex justify-between mb-2' key={index}>
+                                <div className="w-[200px]">
+                                    <MyInput value={option.content} onChange={(e) => onOptionContentChange(e, index)} />
+                                </div>
+                                <MyArraySwitch label="正解?" index={index} checked={option.is_answer} onChange={onOptionIsAnswerChange} />
+                                <button className="text-red-500" onClick={() => removeInput(index)}>-移除</button>
                             </div>
                         )
                     })

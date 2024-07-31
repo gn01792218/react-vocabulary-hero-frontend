@@ -15,7 +15,7 @@ function MyVocabularyAddToNoteCheckboxList({ note, vocabularys }: Props) {
     const [checkedList, setCheckedList] = useState<number[]>([])
     const [open, setOpen] = useState(false)
     async function onSubmit() {
-        await addVocabularyToNote(note, { vocabularys_id: checkedList })
+        await addVocabularyToNote(note, { ids: checkedList })
         //更新vocabularys
         getAllVocabularyIncludeAllRelationship()
     }

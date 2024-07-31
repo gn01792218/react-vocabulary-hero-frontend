@@ -8,7 +8,7 @@ interface Props {
 }
 export default function MyArraySwitch({ label, description, onChange, checked,index }: Props) {
     return (
-        <Field>
+        <Field className="flex flex-col items-center">
             <div className='flex'>
             <Label>{label}{checked}</Label>
             {

@@ -1,3 +1,5 @@
+import { TestPaper } from "./testPaper"
+
 // 選擇題
 export interface MCQQuestion{
    id:number,
@@ -6,7 +8,8 @@ export interface MCQQuestion{
    solutions:string[],
    share:boolean,
    user_id:number,
-   options:MCQQuestionOption[]
+   options:MCQQuestionOption[],
+   test_papers?:TestPaper[]
 }
 //請求與回應
 export interface MCQQuestionCreateRequestForm{

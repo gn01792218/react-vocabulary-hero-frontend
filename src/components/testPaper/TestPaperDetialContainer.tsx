@@ -20,7 +20,7 @@ function TestPaperDetailContainer({ editable }: Props) {
         <section>
             {
                 currentTestPaper? 
-                <TestPaperDetailCard editable={editable} testPage={currentTestPaper}/> : 
+                <TestPaperDetailCard editable={editable} testPaper={currentTestPaper}/> : 
                 <p>找不到該考卷</p>
             }
         </section>

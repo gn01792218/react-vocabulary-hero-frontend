@@ -5,45 +5,46 @@ import MyVocabularyAddToNoteCheckboxList from "../vocabulary/MyVocabularyCheckbo
 import MCQQUestionCreateForm from "../MCQ/MCQQuestionCreateForm"
 import VocabularyDetailListForNote from "../vocabulary/VocabularyDetailListForNote"
 import MCQQuestionList from "../MCQ/MCQQuestionList"
+import MyMCQQuestionAddToTestPaperCheckboxList from "../MCQ/MyMCQQuestionAddToTestPaperCheckboxList"
 interface Props {
     editable:boolean
-    testPage: TestPaper | undefined
+    testPaper: TestPaper | undefined
 }
-function TestPaperDetailCard({ editable, testPage }: Props) {
+function TestPaperDetailCard({ editable, testPaper }: Props) {
     const navigate = useNavigate()
     const { deleteTestPaper } = useTestPaper()
     const { user } = useUser()
 
     async function onNoteDeteled(){
-        if(!testPage) return 
-        await deleteTestPaper(testPage?.id)
+        if(!testPaper) return 
+        await deleteTestPaper(testPaper?.id)
         navigate('/')
     }
     
     return (
         <div className='border-red-200 border-2 p-5'>
             <div>
-                <p>{testPage?.title}</p>
-                <p>{testPage?.description}</p>
+                <p>{testPaper?.title}</p>
+                <p>{testPaper?.description}</p>
                 {
-                    (editable && testPage) && 
+                    (editable && testPaper) && 
                     <section>
                         <button className="block border-2 border-red-500" onClick={onNoteDeteled}>-刪除此卷</button>
                     </section>
                 }
                 {
                     user?.id &&
-                    testPage?.id && 
+                    testPaper?.id && 
                     <section className="flex justify-around">
                         {/* 這裡是建立選擇題的按鈕 */}
-                        <MCQQUestionCreateForm testPaperId={testPage.id}/>
-                        {/* <MyVocabularyAddToNoteCheckboxList note={note} vocabularys={vocabularys.filter(v=>v.userId === user?.id)}/> */}
+                        <MCQQUestionCreateForm testPaperId={testPaper.id}/>
+                        <MyMCQQuestionAddToTestPaperCheckboxList testPaper={testPaper}/>
                     </section>
                 }     
                 ----------------------------------------------------------------------------------------
                 {
-                    testPage?.MCQs &&
-                   <MCQQuestionList MCQQuestions={testPage.MCQs}/> 
+                    testPaper?.MCQs &&
+                   <MCQQuestionList MCQQuestions={testPaper.MCQs}/> 
                 }
                  </div> 
         </div>

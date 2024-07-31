@@ -1,5 +1,5 @@
 import { useAxios } from "../useAxios"
-import { TestPaper, TestPaperCreateRequest, TestPaperUpdateRequest } from "../../types/testPaper"
+import { TestPaper, TestPaperCreateRequest, TestPaperMCQsUpdateRequest, TestPaperUpdateRequest } from "../../types/testPaper"
 export default function useNoteApi(){
     const { fetchData } = useAxios()
     async function getAllTestPaperRequest(){
@@ -17,6 +17,9 @@ export default function useNoteApi(){
     async function updateTestPaper(testPaperId:number, payload:TestPaperUpdateRequest){
         return await fetchData<TestPaper>(`/testPapers/${testPaperId}`,"PUT", {payload})
     }
+    async function updateTestPaperMCQs(testPaperId:number, payload:TestPaperMCQsUpdateRequest){
+        return await fetchData<TestPaper>(`/testPapers/${testPaperId}/MCQs`,"PUT", {payload})
+    }
     return {
         //methods
         getAllTestPaperRequest,
@@ -24,5 +27,6 @@ export default function useNoteApi(){
         createTestPaperRequest,
         deleteTestPaperRequest,
         updateTestPaper,
+        updateTestPaperMCQs
     }
 }

@@ -5,10 +5,11 @@ import { MCQQuestion, MCQQuestionCreateRequest, MCQQuestionUpdateRequest, MCQQue
 import useMCQApi from "./useMCQApi"
 import { setCurrentMCQQuestion, setMCQs } from "../../store/mCQSlice"
 import useUser from "../user/useUser"
-import { isTypedArray } from "util/types"
 import MCQQuestionCreateForm from "../../components/MCQ/MCQQuestionCreateForm"
 import useTestPaper from "../testPaper/useTestPaper"
+import useTestPaperApi from "../testPaper/useTestPaperApi"
 import { setCurrentTestPaper } from "../../store/testPaperSlice"
+import { TestPaper, TestPaperMCQsUpdateRequest } from "../../types/testPaper"
 
 export default function useMCQ() {
     const dispatch = useDispatch()
@@ -16,6 +17,9 @@ export default function useMCQ() {
     const {
         currentTestPaper
     } = useTestPaper()
+    const { 
+        updateTestPaperMCQs
+     } = useTestPaperApi()
     const {
         createRequest,
         getAllRequest,
@@ -62,6 +66,11 @@ export default function useMCQ() {
     async function deleteById(testPaperId: number) {
         const deleteObject = await deleteRequest(testPaperId)
         if (deleteObject) dispatch(setMCQs([...MCQs.filter(n => n.id !== deleteObject.id)]))
+    }
+    async function addMCQQuestionToTestPaper(testPaper:TestPaper, payload:TestPaperMCQsUpdateRequest){
+        payload.ids = pushNewIdListToOriginList(testPaper, payload.ids)
+        const updateData = await updateTestPaperMCQs(testPaper.id, payload)
+        if (updateData) dispatch(setCurrentTestPaper(updateData))
     }
     function onCreateMCQQuestionDataChange(e: React.ChangeEvent<HTMLInputElement | HTMLButtonElement>) {
         const { name, value } = e.target;
@@ -172,6 +181,11 @@ export default function useMCQ() {
             options: [...MCQQuestionFormData.options]
         }));
     }
+    function pushNewIdListToOriginList(targetObject: TestPaper, payload: number[]) {
+        const originVocabularyIdList = targetObject.MCQs.map(v => v.id)
+        originVocabularyIdList.push(...payload)
+        return originVocabularyIdList
+    }
     return {
         //data
         MCQs,
@@ -183,6 +197,7 @@ export default function useMCQ() {
         getUserAll,
         getById,
         deleteById,
+        addMCQQuestionToTestPaper,
         updateStoreCurrent,
         onCreateMCQQuestionDataChange,
         onMCQQuestionFormDataSolutionsChange,

@@ -47,7 +47,7 @@ export default function useNote() {
         }));
     };
     async function addVocabularyToNote(note: Note, payload: NoteVocabularysUpdateRequest) {
-        payload.vocabularys_id = pushNewIdListToOriginList(note, payload.vocabularys_id)
+        payload.ids = pushNewIdListToOriginList(note, payload.ids)
         const updateNote = await updateNoteVocabularys(note.id, payload)
         if (updateNote) dispatch(setCurrentNote(updateNote))
     }
@@ -55,7 +55,7 @@ export default function useNote() {
         const note = await getNoteIncludeVocabularyRequest(noteId)
         if(!note) return console.log('找不到該note')
         const vocabularys_id = note.vocabularys.filter(v=>v.id !== vocabularyId).map(v=>v.id)
-        const updateNote = await updateNoteVocabularys(note.id, {vocabularys_id})
+        const updateNote = await updateNoteVocabularys(note.id, {ids: vocabularys_id})
         if(updateNote) dispatch(setCurrentNote(updateNote))
     }
     async function updateStoreCurrentNote(noteId:number) {
@@ -63,8 +63,8 @@ export default function useNote() {
         if(note) dispatch(setCurrentNote({...note}))
     }
 
-    function pushNewIdListToOriginList(note: Note, payload: number[]) {
-        const originVocabularyIdList = note.vocabularys.map(v => v.id)
+    function pushNewIdListToOriginList(targetObject: Note, payload: number[]) {
+        const originVocabularyIdList = targetObject.vocabularys.map(v => v.id)
         originVocabularyIdList.push(...payload)
         return originVocabularyIdList
     }
