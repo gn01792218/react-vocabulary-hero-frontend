@@ -1,5 +1,5 @@
 import { Vocabulary } from "../../types/vocabulary"
-import Speakable from "../Speakable"
+import VocabularySpeakable from "./VocabularySpeakable"
 import { FcAdvance } from 'react-icons/fc'
 
 interface Props {
@@ -20,7 +20,7 @@ function VocabularyMeta({ vocabulary, showGoDetailIcon }: Props) {
                     <FcAdvance className="cursor-pointer" size={25} />
                 </div>
             }
-            <Speakable text={vocabulary.spelling} pronunciation={vocabulary.pronunciation}/>
+            <VocabularySpeakable text={vocabulary.spelling} pronunciation={vocabulary.pronunciation}/>
         </div>
     )
 }

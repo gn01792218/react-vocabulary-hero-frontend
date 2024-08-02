@@ -1,10 +1,10 @@
 import { FcAdvertising } from 'react-icons/fc'
-import { useSpeech } from "../hooks/useSpeech"
+import { useSpeech } from "../../hooks/useSpeech"
 interface Props {
     text: string,
     pronunciation?: string
 }
-function Speakable({ text, pronunciation }: Props) {
+function VocabularySpeakable({ text, pronunciation }: Props) {
     const { speak } = useSpeech()
     return (
         <div className='flex flex-col' onClick={() => speak(text)}>
@@ -16,4 +16,4 @@ function Speakable({ text, pronunciation }: Props) {
         </div>
     )
 }
-export default Speakable
+export default VocabularySpeakable
