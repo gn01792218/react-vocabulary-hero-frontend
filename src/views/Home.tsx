@@ -5,6 +5,7 @@ import TestPaperCreateForm from '../components/testPaper/TestPaperCreatForm'
 import TestPaperList from '../components/testPaper/TestPaperList'
 import VocabularyCreateForm from '../components/vocabulary/VocabularyCreateForm'
 import VocabularyList from '../components/vocabulary/VocabularyList'
+import { FcAdvance } from 'react-icons/fc'
 import useNote from '../hooks/note/useNote'
 import useTestPaper from '../hooks/testPaper/useTestPaper'
 import useUser from '../hooks/user/useUser'
@@ -19,10 +20,10 @@ function Home() {
         notes,
         getAllNotes
     } = useNote()
-    const { 
+    const {
         testPapers,
         getAllTestPapers
-     } = useTestPaper()
+    } = useTestPaper()
     useMemo(() => {
         getAllTestPapers()
         getAllNotes()
@@ -32,7 +33,7 @@ function Home() {
         <div className=''>
             <section className='flex justify-around mb-5'>
                 <NoteCreateForm />
-                <TestPaperCreateForm/>
+                <TestPaperCreateForm />
                 <VocabularyCreateForm />
             </section>
             <section className='w-[130px] ml-auto'>
@@ -40,7 +41,11 @@ function Home() {
             </section>
             <section className='mb-5'>
                 <p className='text-white font-bold text-xl shadow-2xl'>我的考卷</p>
-                <TestPaperList items={testPapers} />
+                <TestPaperList items={testPapers.filter(i=>(i.user_id === user?.id))} />
+                <Link className='flex' to="/TestPapers">
+                    <p className='text-gray-300 cursor-pointer mr-1'>所有公開的試卷</p>
+                    <FcAdvance className="cursor-pointer" size={25} />
+                </Link>
             </section>
             <section className='mb-5'>
                 <p className='text-white font-bold text-xl shadow-2xl'>我的筆記</p>

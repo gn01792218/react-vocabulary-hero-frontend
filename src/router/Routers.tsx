@@ -15,6 +15,7 @@ function Routers() {
   const EditTestPaper = lazy(() => import('../views/EditTestPaper'))
   const Setting = lazy(()=>import('../views/Setting'))
   const MyTestQuestion = lazy(()=>import('../views/MyTestQuestion'))
+  const TestPapers = lazy(()=>import('../views/TestPapers'))
   return (
     <div className="App">
       <Suspense fallback={<div>Loading</div>}>
@@ -31,6 +32,7 @@ function Routers() {
           <Route path="/Login" element={<Login />} />
           <Route path="/Setting" element={<Setting />} />
           <Route path='/MyTestQuestion' element={<MyTestQuestion/>}/>
+          <Route path='/TestPapers' element={<TestPapers/>}/>
         </Route>
           <Route path="/SignUp" element={<SignUp />} />
         </Routes>

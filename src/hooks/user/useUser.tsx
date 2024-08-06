@@ -4,7 +4,7 @@ import { useAppSelector, useAppDispatch } from '../../store/hooks'
 import { LocalStorageItem } from '../../types/localStorage'
 import { setAccessToken, setRefreshToken } from '../../store/authSlice'
 export default function useUser() {
-    const { getAllUserRequest } = useUserApi()
+    const { getAllUserRequest, getUserByIdRequest } = useUserApi()
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
     const user = useAppSelector(state => state.user.user)
@@ -12,6 +12,9 @@ export default function useUser() {
     async function getAllUser() {
         const users = await getAllUserRequest()
         if (users) dispatch(setUsers(users))
+    }
+    async function getUserById(id: number) {
+        return await getUserByIdRequest(id)
     }
     function initUser() {
         //先下載localStorage裡面的token
@@ -27,6 +30,7 @@ export default function useUser() {
         user,
         //methods
         getAllUser,
+        getUserById,
         initUser
     }
 }

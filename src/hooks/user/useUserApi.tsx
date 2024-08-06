@@ -8,9 +8,13 @@ export default function useUserApi(){
     async function getUserRequest(){
         return await fetchData<User>('/users/userInfo','GET')
     }
+    async function getUserByIdRequest(id:number){
+        return await fetchData<User>(`/users/${id}`,"GET")
+    }
     return {
         //methods
         getAllUserRequest,
         getUserRequest,
+        getUserByIdRequest
     }
 }
