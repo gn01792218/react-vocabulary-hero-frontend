@@ -2,7 +2,7 @@ import TestPaperDetailContainer from "../components/testPaper/TestPaperDetialCon
 
 function TestPaperDetail() {
     return (
-       <TestPaperDetailContainer/> 
+       <TestPaperDetailContainer showAllAnswer={true} showAllSolution={true}/> 
     )
 }
 export default TestPaperDetail

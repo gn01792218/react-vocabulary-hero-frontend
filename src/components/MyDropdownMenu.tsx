@@ -10,7 +10,7 @@ export default function MyDropdownMenu({ items, title }: Props) {
     const [dropDown, setDropDown] = useState(false)
     return (
         <section>
-            <div className="border-2 bg-green-500 border-black rounded-full text-center" onClick={() => { setDropDown(!dropDown) }}>{title}</div>
+            <div className="border-2 bg-green-500 border-black rounded-full text-center cursor-pointer" onClick={() => { setDropDown(!dropDown) }}>{title}</div>
             {
                 dropDown &&
                 <ul className="bg-red-100 w-[94%] mx-auto">

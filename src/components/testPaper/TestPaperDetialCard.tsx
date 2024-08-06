@@ -1,16 +1,16 @@
 import { TestPaper } from "../../types/testPaper"
 import useTestPaper from "../../hooks/testPaper/useTestPaper"
 import useUser from "../../hooks/user/useUser"
-import MyVocabularyAddToNoteCheckboxList from "../vocabulary/MyVocabularyCheckboxList"
 import MCQQUestionCreateForm from "../MCQ/MCQQuestionCreateForm"
-import VocabularyDetailListForNote from "../vocabulary/VocabularyDetailListForNote"
 import MCQQuestionList from "../MCQ/MCQQuestionList"
 import MyMCQQuestionAddToTestPaperCheckboxList from "../MCQ/MyMCQQuestionAddToTestPaperCheckboxList"
 interface Props {
-    editable:boolean
+    editable?:boolean
+    showAllAnswer?:boolean
+    showAllSolution?:boolean
     testPaper: TestPaper | undefined
 }
-function TestPaperDetailCard({ editable, testPaper }: Props) {
+function TestPaperDetailCard({ editable, showAllAnswer, showAllSolution, testPaper }: Props) {
     const navigate = useNavigate()
     const { deleteTestPaper } = useTestPaper()
     const { user } = useUser()
@@ -44,7 +44,7 @@ function TestPaperDetailCard({ editable, testPaper }: Props) {
                 ----------------------------------------------------------------------------------------
                 {
                     testPaper?.MCQs &&
-                   <MCQQuestionList MCQQuestions={testPaper.MCQs}/> 
+                   <MCQQuestionList MCQQuestions={testPaper.MCQs} showAllAnswer={showAllAnswer || false} showAllSolution={showAllSolution || false}/> 
                 }
                  </div> 
         </div>
