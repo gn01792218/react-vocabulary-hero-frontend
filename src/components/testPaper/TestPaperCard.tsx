@@ -33,11 +33,11 @@ function TestPaperCard({ testPaper }: Props) {
             <MyDropdownMenu title="options" items={[
                 {
                     label: "編輯",
-                    onClick: () => navigate(`EditTestPaper/${testPaper.id}`)
+                    onClick: () => navigate(`/EditTestPaper/${testPaper.id}`)
                 },
                 {
                     label: "解析",
-                    onClick:()=> navigate(`TestPaperDetialWithSolution/${testPaper.id}`)
+                    onClick:()=> navigate(`/TestPaperDetialWithSolution/${testPaper.id}`)
                 }
             ]} />
             <p className="text-xs text-gray-500 text-right mt-1">出題者 :{testPaperOwner?.name || testPaperOwner?.id} </p>

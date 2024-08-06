@@ -40,7 +40,7 @@ function VocabularyCard({ vocabulary }: Props) {
                 },
                 {
                     label: "編輯",
-                    onClick:()=> navigate(`EditVocabulary/${vocabulary.id}`)
+                    onClick:()=> navigate(`/EditVocabulary/${vocabulary.id}`)
                 }
             ]} />
         </div>

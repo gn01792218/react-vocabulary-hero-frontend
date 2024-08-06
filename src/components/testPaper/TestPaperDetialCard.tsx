@@ -27,7 +27,7 @@ function TestPaperDetailCard({ editable, showAllAnswer, showAllSolution, testPap
                 <p>{testPaper?.title}</p>
                 <p>{testPaper?.description}</p>
                 {
-                    (editable && testPaper) && 
+                    (editable && testPaper && user?.id === testPaper.user_id) && 
                     <section>
                         <button className="block border-2 border-red-500" onClick={onNoteDeteled}>-刪除此卷</button>
                     </section>

@@ -26,11 +26,22 @@ function MCQQuestionCreateForm({ testPaperId }: Props) {
         removeOption
     } = useMCQ()
     const [open, setOpen] = useState(false)
+    useEffect(()=>{
+        init()
+    },[])
+    function init(){
+        //添加四個題目選項input
+        for(let i=0 ; i<4 ; i++){
+            addOptionForm()
+        }
+    }
     async function onSubmit() {
         console.log(MCQQuestionFormData)
         //檢查沒有選項就不建立
+        if(!MCQQuestionFormData.question) return alert('請撰寫題目敘述')
         if(!MCQQuestionFormData.options.length) return alert('請為題目建立選項!')
         if(!checkOptionsHaveAtLestOneAnswer()) return alert('請設置一個正確答案!')
+        if(!MCQQuestionFormData.options.every(o=>o.content)) return alert('不能有選項是空白的')
         await create(testPaperId)
         setOpen(false)
     }

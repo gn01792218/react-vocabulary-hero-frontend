@@ -21,7 +21,7 @@ function NoteCard({ note }: Props) {
             <MyDropdownMenu title="options" items={[
                 {
                     label: "編輯",
-                    onClick: () => navigate(`EditNote/${note.id}`)
+                    onClick: () => navigate(`/EditNote/${note.id}`)
                 }
             ]} />
         </div >
