@@ -40,12 +40,14 @@ function Home() {
                 <ImageToTextConvertor />
             </section>
             <section className='mb-5'>
+                <div className='w-full flex justify-between max-w-[460px]'>
                 <p className='text-white font-bold text-xl shadow-2xl'>我的考卷</p>
-                <TestPaperList items={testPapers.filter(i=>(i.user_id === user?.id))} />
                 <Link className='flex' to="/TestPapers">
                     <p className='text-gray-300 cursor-pointer mr-1'>所有公開的試卷</p>
                     <FcAdvance className="cursor-pointer" size={25} />
                 </Link>
+                </div>
+                <TestPaperList items={testPapers.filter(i=>(i.user_id === user?.id))} />
             </section>
             <section className='mb-5'>
                 <p className='text-white font-bold text-xl shadow-2xl'>我的筆記</p>

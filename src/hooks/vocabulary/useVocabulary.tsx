@@ -45,7 +45,6 @@ export default function useVocabulary() {
     }
     async function getAllVocabularyIncludeAllRelationship() {
         const vocabularys = await getAllVocabularyIncludeAllRelationshipRequest()
-        console.log(vocabularys)
         if (vocabularys) dispatch(setVocabularys([...vocabularys]))
     }
     async function createVocabulary(noteId?: number) {

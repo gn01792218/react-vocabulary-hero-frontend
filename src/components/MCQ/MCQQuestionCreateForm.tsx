@@ -23,20 +23,24 @@ function MCQQuestionCreateForm({ testPaperId }: Props) {
         addTagsForm,
         removeTags,
         addOptionForm,
-        removeOption
+        removeOption,
+        initMCQoptions,
+        setMCQQuestionFormData
     } = useMCQ()
     const [open, setOpen] = useState(false)
     useEffect(()=>{
-        init()
+        initMCQoptions()
+        setMCQQuestionFormData({
+            ...{
+                question: '',
+                solutions: [],
+                tags: [],
+                share: true,
+                options: MCQQuestionFormData.options
+            }
+        })
     },[])
-    function init(){
-        //添加四個題目選項input
-        for(let i=0 ; i<4 ; i++){
-            addOptionForm()
-        }
-    }
     async function onSubmit() {
-        console.log(MCQQuestionFormData)
         //檢查沒有選項就不建立
         if(!MCQQuestionFormData.question) return alert('請撰寫題目敘述')
         if(!MCQQuestionFormData.options.length) return alert('請為題目建立選項!')

@@ -59,7 +59,6 @@ export default function useTestPaper() {
     }
     async function updateStoreCurrentTestPaper(testPaper: number) {
         const res = await getTestPaper(testPaper)
-        console.log('取得testPaper',res)
         if (res) dispatch(setCurrentTestPaper({ ...res }))
     }
     function resetCreateNoteForm() {

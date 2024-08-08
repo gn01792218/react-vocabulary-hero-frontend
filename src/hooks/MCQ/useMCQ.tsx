@@ -16,9 +16,9 @@ export default function useMCQ() {
     const {
         currentTestPaper
     } = useTestPaper()
-    const { 
+    const {
         updateTestPaperMCQs
-     } = useTestPaperApi()
+    } = useTestPaperApi()
     const {
         createRequest,
         getAllRequest,
@@ -27,6 +27,7 @@ export default function useMCQ() {
         deleteRequest,
         updateRequest,
     } = useMCQApi()
+    const MCQQuestionOptionsInitNumber = 4
     const MCQs = useAppSelector((state) => state.MCQ.MCQs)
     const currentMCQQuestion = useAppSelector((state) => state.MCQ.currentMCQQuestion)
     const [MCQQuestionFormData, setMCQQuestionFormData] = useState<MCQQuestionCreateRequestForm>({
@@ -55,18 +56,18 @@ export default function useMCQ() {
         })
         if (!res) return alert('請求發生錯誤')
         if (!currentTestPaper) return alert('內部資料錯誤 : 找不到currentTestPaper')
-        resetCreateMCQQuestionForm()
         dispatch(setMCQs([...MCQs, res])) //推到共用的地方去 
         dispatch(setCurrentTestPaper({
             ...currentTestPaper,
             MCQs: [...currentTestPaper.MCQs, res]
         }))
+        resetCreateMCQQuestionForm()
     }
     async function deleteById(testPaperId: number) {
         const deleteObject = await deleteRequest(testPaperId)
         if (deleteObject) dispatch(setMCQs([...MCQs.filter(n => n.id !== deleteObject.id)]))
     }
-    async function addMCQQuestionToTestPaper(testPaper:TestPaper, payload:TestPaperMCQsUpdateRequest){
+    async function addMCQQuestionToTestPaper(testPaper: TestPaper, payload: TestPaperMCQsUpdateRequest) {
         payload.ids = pushNewIdListToOriginList(testPaper, payload.ids)
         const updateData = await updateTestPaperMCQs(testPaper.id, payload)
         if (updateData) dispatch(setCurrentTestPaper(updateData))
@@ -111,13 +112,15 @@ export default function useMCQ() {
         if (res) dispatch(setCurrentMCQQuestion({ ...res }))
     }
     function resetCreateMCQQuestionForm() {
+        MCQQuestionFormData.options.length = 0 //先讓選項歸0
+        initMCQoptions()
         setMCQQuestionFormData({
             ...{
                 question: '',
                 solutions: [],
                 tags: [],
                 share: true,
-                options: []
+                options: MCQQuestionFormData.options
             }
         })
     }
@@ -173,7 +176,6 @@ export default function useMCQ() {
     }
     function onMCCQQuestionOptionIsAnswerSwitchChange(index: number, checked: boolean) {
         MCQQuestionFormData.options[index].is_answer = checked
-        console.log(index, checked)
         setMCQQuestionFormData(prevState => ({
             ...prevState,
             options: [...MCQQuestionFormData.options]
@@ -183,6 +185,12 @@ export default function useMCQ() {
         const originVocabularyIdList = targetObject.MCQs.map(v => v.id)
         originVocabularyIdList.push(...payload)
         return originVocabularyIdList
+    }
+    function initMCQoptions() {
+        //添加四個題目選項input
+        for (let i = 0; i < MCQQuestionOptionsInitNumber; i++) {
+            MCQQuestionFormData.options.push({ content: "", is_answer: false })
+        }
     }
     return {
         //data
@@ -208,7 +216,9 @@ export default function useMCQ() {
         addTagsForm,
         removeTags,
         addOptionForm,
-        removeOption
+        removeOption,
+        initMCQoptions,
+        setMCQQuestionFormData
     }
 
 }
